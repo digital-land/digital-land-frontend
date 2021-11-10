@@ -2,6 +2,9 @@
   "name": "digital-land-frontend",
   "version": "0.1.0",
   "description": "frontend components and assets for digital land",
+  "engines": {
+    "node": "^16.0.0"
+  },
   "scripts": {
     "build:stylesheets": "node-sass digital_land_frontend/src/scss -o assets/stylesheets --include-path node_modules/govuk-frontend --include-path digital_land_frontend/templates/components",
     "lint:stylesheets": "sass-lint --config .sass-lint.yml 'digital_land_frontend/**/*.scss' --verbose --no-exit",

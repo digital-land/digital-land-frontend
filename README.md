@@ -1,8 +1,17 @@
 # Digital Land Frontend
 
-## Set-up
+## Requirements
+
+- Node V16+
+- Python 3.5
+- PIP
+
+## Getting started
+
+- Run `npm install` to install all the node packages
 
 We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
+
 
 ## Templates
 
