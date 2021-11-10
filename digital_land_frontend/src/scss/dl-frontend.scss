@@ -1,0 +1,8 @@
+$govuk-fonts-path: "/static/govuk/assets/fonts/";
+$govuk-images-path: "/static/govuk/assets/images/";
+
+// import all GOVUK Frontend scss
+@import "node_modules/govuk-frontend/govuk/all";
+
+@import "settings/all";
+@import "measurements/all";
