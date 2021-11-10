@@ -11,7 +11,7 @@ All templates for HTML pages used within digital land applications will be writt
 When writing blocks in Jinja ensure the name is added to the endblock statement for example:
 
 ```
-{%- block beforeHeadEnd %}...{%- endblock beforeHeadEnd %}
+{%- block headEnd %}...{%- endblock headEnd %}
 ```
 
  ## Components
