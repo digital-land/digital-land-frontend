@@ -1,8 +1,18 @@
 # Digital Land Frontend
 
+## Set-up
+
+We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
+
 ## Templates
 
- - All templates for HTML pages used within digital land applications will be written in Jinja and use the file extension `.jinja`. 
+All templates for HTML pages used within digital land applications will be written in Jinja and use the file extension `.jinja`. 
+
+When writing blocks in Jinja ensure the name is added to the endblock statement for example:
+
+```
+{%- block beforeHeadEnd %}...{%- endblock beforeHeadEnd %}
+```
 
  ## Components
 
