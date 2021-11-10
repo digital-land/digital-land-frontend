@@ -1,0 +1,87 @@
+{% extends "govuk-frontend-jinja/template.html" %}
+{% from "govuk-frontend-jinja/components/phase-banner/macro.html" import govukPhaseBanner %}
+{% from "govuk-frontend-jinja/components/breadcrumbs/macro.html" import govukBreadcrumbs %}
+
+{%- block pageTitle %}Digital Land - Planning data you can find, use and trust{% endblock -%}
+
+{% block headIcons %}
+  <link rel="shortcut icon" sizes="48x48" href="{{ assetPath | default('/assets') }}/images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" sizes="32x32" href="{{ assetPath | default('/assets') }}/images/favicon-32x32.png" type="image/png">
+  <link rel="shortcut icon" sizes="16x16" href="{{ assetPath | default('/assets') }}/images/favicon-16x16.png" type="image/png">
+  <link rel="apple-touch-icon" href="{{ assetPath | default('/assets') }}/images/apple-touch-icon.png">
+{% endblock %}
+
+{% block head %}
+	<meta name="digital-land:template" content="{{ templateName|default('digital-land-frontend/base.jinja') }}">
+
+  {% block pageAssets %}
+    {% block mapAssets %}
+      {%- if includesMap -%}
+        {% include 'digital-land-frontend/partials/dl-map-assets.jinja' %}
+      {%- endif %}
+    {% endblock mapAssets %}
+
+    {%- block stylesheets %}
+    <link href="{{ assetPath | default('/assets') }}/stylesheets/dl-frontend.css" rel="stylesheet" />
+    {% endblock stylesheets -%}
+  {% endblock pageAssets %}
+
+  {%- block headEnd %}{% endblock headEnd -%}
+{% endblock head %}
+
+{% block header %}
+  {% block cookieBanner %}
+    {% include 'digital-land-frontend/partials/dl-cookie-banner.jinja' %}
+  {% endblock cookieBanner %}
+
+  {% block mastHead %}
+    {% include 'digital-land-frontend/partials/dl-header.jinja' %}
+  {% endblock mastHead %}
+{% endblock header %}
+
+{% block beforeContent %}
+	{% include 'digital-land-frontend/partials/dl-prototype-banner.jinja' %}
+	{% block breadcrumbs %}{% endblock breadcrumbs %}
+{% endblock beforeContent %}
+
+{% block footer %}
+	{% block footerStart %}{% endblock footerStart %}
+	{% include 'digital-land-frontend/partials/dl-footer-code.jinja' %}
+{% endblock %}
+
+{% block bodyEnd %}
+  {% block bodyScriptsStart %}{% endblock bodyScriptsStart %}
+
+  {% block bodyScripts %}
+    {% block analyticScripts %}
+    <script src="{{ assetPath | default('/assets') }}/javascripts/dl-cookies.js"></script>
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    {% endblock analyticScripts %}
+
+    {% block libraryScripts %}
+    	{%- if includeJQuery == "true" -%}
+	      <script src="{{ staticPath | default('/static') }}/javascripts/vendor/jquery-3.4.1.min.js"></script>
+	    {% endif %}
+    {% endblock libraryScripts %}
+    
+    {% block govScripts %}
+    <script src="{{ assetPath | default('/assets') }}/javascripts/govuk/govuk-frontend.min.js"></script>
+    <script>
+      // initiate all GOVUK components
+      window.GOVUKFrontend.initAll();
+    </script>
+    {% endblock govScripts %}
+
+    {% block digitalLandScripts %}
+    <script src="{{ assetPath | default('/assets') }}/javascripts/dl-frontend.js"></script>
+    <script>
+      // adds any necessary polyfills
+      window.DLFrontend.polyfill();
+    </script>
+    {% endblock digitalLandScripts %}
+
+    {% block pageScripts %}{% endblock pageScripts %}
+  {% endblock bodyScripts %}
+
+  {% block bodyScriptsEnd %}{% endblock bodyScriptsEnd %}
+{% endblock %}
