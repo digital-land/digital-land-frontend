@@ -11,3 +11,7 @@
 ## Partials 
 
 - A partial is a shared piece of jinja which is the same across any digital land application. If the content or structure of the partial needs differ depending on it's context then it should be abstracted as a reusable component.
+
+# Tasks
+
+- [ ] Check the rendered output of jinja templates for consistency of whitespace, and output
