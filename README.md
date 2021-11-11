@@ -8,6 +8,9 @@
 
 ## Getting started
 
+This documentation assumes you have installed [Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python) and [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/). We recommend using 'Node Version Manager' (NVM) because this repository has a `[.nvmrc](.nvmrc)` file which will ensure you are using the correct version of NodeJS.
+
+
 - Run `npm install` to install all the node packages
 
 We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
