@@ -8,10 +8,16 @@
 
 ## Getting started
 
-This documentation assumes you have installed [Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python) and [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/). We recommend using 'Node Version Manager' (NVM) because this repository has a `[.nvmrc](.nvmrc)` file which will ensure you are using the correct version of NodeJS.
+This documentation assumes you have installed [Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python) and [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/). We recommend using 'Node Version Manager' (NVM) because this repository has a [.nvmrc](.nvmrc) file which will ensure you are using the correct version of NodeJS.
 
+1. Clone this repository:
+```
+git clone git@github.com:digital-land/digital-land-frontend.git
+```
+2. In terminal, switch to the root directory of the cloned repository.
+3. Make sure you are using the correct Node version. Users of RVM can type `rvm use`
+2. Run `npm install` to install all the node packages
 
-- Run `npm install` to install all the node packages
 
 We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
 
