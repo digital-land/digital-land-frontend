@@ -22,7 +22,7 @@ setup(
     package_data={"digital-land-frontend": components},
     python_requires=">=3.5",
     install_requires=[
-        "jinja2==2.11.3",
+        "jinja2",
         "govuk-frontend-jinja",
     ],
     include_package_data=True,
