@@ -1,0 +1,33 @@
+{
+  "name": "dl-frontend",
+  "description": "DL Frontend",
+  "version": "0.1.1",
+  "engines": {
+    "node": ">= 4.2.0"
+  },
+  "author": "Digital Land team",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/digital-land/digital-land-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/digital-land/digital-land-frontend/issues"
+  },
+  "keywords": [
+    "govuk",
+    "frontend",
+    "design system",
+    "template"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "node-sass": "^6.0.1",
+    "nps": "^5.10.0",
+    "yargs": "^17.2.1"
+  },
+  "homepage": "https://github.com/digital-land/digital-land-frontend#readme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
