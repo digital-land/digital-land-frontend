@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "copyfiles": "latest",
+    "govuk-frontend": "^3.14.0",
     "node-sass": "^6.0.1",
     "nps": "^5.10.0"
   },

@@ -59,6 +59,7 @@ This gives you access to the scss, the stylesheet build scripts and the compiled
 You will also need to install these npm dependencies
 ```
 npm install copyfiles
+npm install govuk-frontend
 npm install node-sass
 npm install nps
 ```
