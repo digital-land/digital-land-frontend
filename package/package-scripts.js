@@ -4,9 +4,9 @@ const readJsonFile = (filePath) => {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'))
 }
 
-let configPaths = require('./config-paths.json')
+let configPaths = require('./default.paths.json')
+const optionalConfigPath = 'digital-land-frontend.config.json'
 
-const optionalConfigPath = 'dl-build-config.json'
 if (fs.existsSync(optionalConfigPath)) {
   //file exists
   configPaths = {
@@ -24,7 +24,10 @@ module.exports = {
       default: `node ${configPaths.digitalLandFrontendPath}index.js`
     },
     build: {
-      stylesheets: `node-sass ${configPaths.scssPath} -o ${configPaths.outputPath}/stylesheets --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`
+      stylesheets: `node-sass ${configPaths.scssPath} -o ${configPaths.stylesheetsOutputPath} --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`
+    },
+    copy: {
+      javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.js" ${configPaths.jsOutputPath}`
     }
   }
 };
