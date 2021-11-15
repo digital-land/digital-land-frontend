@@ -1,0 +1,27 @@
+{% macro dlHeaderBar(params) %}
+<header role="banner" id="global-header" class="govuk-header  with-proposition dl-header{{ ' dl-header--full' if params.fullWidth }}{{ ' ' + params.classes if params.classes }}" data-module="govuk-header">
+  <div class="govuk-header__container {{ 'dl-full-width-container' if params.fullWidth else 'govuk-width-container' }}">
+    <div class="header-proposition">
+      <div class="govuk-header__content">
+        <a href="https://digital-land.github.io/" class="govuk-header__link govuk-header__link--service-name">
+        Digital Land
+        </a>
+        <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+        {%- if params.transaction %}
+        <span class="dl-header__service-name">{{ params.transaction.name }}</span>
+        {% else %}
+        <nav>
+          <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
+            {% for item in params['items'] %}
+            <li class="govuk-header__navigation-item">
+              <a class="govuk-header__link" href="{{ item.href }}">{{ item.text }}</a>
+            </li>
+            {% endfor %}
+          </ul>
+        </nav>
+        {% endif -%}
+      </div>
+    </div>
+  </div>
+</header>
+{% endmacro %}
