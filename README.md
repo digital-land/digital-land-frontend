@@ -40,6 +40,52 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 
 - A partial is a shared piece of jinja which is the same across any digital land application. If the content or structure of the partial needs differ depending on it's context then it should be abstracted as a reusable component.
 
+## Using digital-land-frontend in your projects
+
+You need to install the python and npm packages.
+
+Install the python package by running
+```
+pip install git+https://github.com/digital-land/digital-land-frontend.git#egg=digital_land_frontend
+```
+This gives you access to all the templates and jinja filters.
+
+Then install the npm package by running
+```
+npm install https://github.com/digital-land/digital-land-frontend/tree/main/package
+```
+This gives you access to the scss, the stylesheet build scripts and the compiled js.
+
+You will also need to install these npm dependencies
+```
+npm install copyfiles
+npm install node-sass
+npm install nps
+```
+
+Once installed add the following line to `package.json` `scripts`
+```
+"nps": "nps -c ./node_modules/digital-land-frontend/package-scripts.js"
+```
+
+In your project you can now build the stylesheets by running:
+```
+npm run nps build.stylesheets
+```
+
+and you can put the js in the right location by running
+```
+npm run nps copy.javascripts
+```
+
+To change where these files are outputted create a `digital-land-frontend.config.json` file. In here you can set these options:
+
+* digitalLandFrontendPath
+* govukFrontendPath
+* scssPath
+* stylesheetsOutputPath
+* jsOutputPath
+
 # Tasks
 
 - [ ] Check the rendered output of jinja templates for consistency of whitespace, and output
