@@ -26,4 +26,7 @@ setup(
         "govuk-frontend-jinja",
     ],
     include_package_data=True,
+    extras_require={
+        "testing": ["pytest", "flake8"]
+    }
 )
