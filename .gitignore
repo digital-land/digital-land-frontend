@@ -4,4 +4,7 @@ assets/
 
 *.egg-info
 
-.python-version
+/.python-version
+__pycache__/
+*.py[cod]
+.eggs
