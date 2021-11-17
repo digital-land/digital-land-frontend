@@ -21,12 +21,7 @@ setup(
     packages=find_packages(),
     package_data={"digital-land-frontend": components},
     python_requires=">=3.5",
-    install_requires=[
-        "jinja2",
-        "govuk-frontend-jinja",
-    ],
+    install_requires=["jinja2", "govuk-frontend-jinja", "validators"],
     include_package_data=True,
-    extras_require={
-        "testing": ["pytest", "flake8"]
-    }
+    extras_require={"testing": ["pytest", "flake8"]},
 )
