@@ -1,0 +1,24 @@
+{% macro dlSubNavTabs(params) %}
+<div class="govuk-tabs" data-module="dl-subnav">
+    <h2 class="govuk-tabs__title">
+      Contents
+    </h2>
+    <nav class="dl-subnav" aria-label="Sub navigation">
+        <ul class="dl-subnav__list">
+            {% for tab in params['tabs'] %}
+            <li class="dl-subnav__list-item dl-subnav__list-item--selected">
+                <a class="dl-subnav__list-item__link" href="#{{ tab.id }}" data-module-sub-nav="tab">
+                {{ tab.label }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    {% for tab in params['tabs'] %}
+    <div id="{{ tab.id }}">
+        {{ tab.html|safe }}
+    </div>
+    {% endfor %}
+</div>
+{% endmacro %}

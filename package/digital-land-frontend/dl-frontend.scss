@@ -6,3 +6,7 @@ $govuk-images-path: "/static/govuk/assets/images/";
 
 @import "settings/all";
 @import "objects/all";
+@import "core/all";
+
+// this will import all the components from components/_all.scss
+@import "components/all";
