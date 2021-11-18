@@ -1,5 +1,3 @@
-import pytest
-from jinja2 import Markup
 from datetime import datetime
 
 from digital_land_frontend.filters import (
