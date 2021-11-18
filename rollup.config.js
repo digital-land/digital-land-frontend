@@ -15,4 +15,13 @@ module.exports = [
     },
     context: "window",
   },
+  {
+    input: "digital_land_frontend/src/javascripts/digital-land-maps.js",
+    output: {
+      file: "package/digital-land-frontend/javascripts/digital-land-map.js",
+      format: 'umd',
+      name: "DLMaps"
+    },
+    context: "window",
+  },
 ];
