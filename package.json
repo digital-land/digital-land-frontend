@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build:javascripts": "rollup --config rollup.config.js",
-    "build:stylesheets": "node-sass digital_land_frontend/src/scss -o assets/stylesheets --include-path node_modules/govuk-frontend --include-path digital_land_frontend/templates/components",
+    "build:stylesheets": "node-sass digital_land_frontend/src/scss -o assets/stylesheets --include-path node_modules/govuk-frontend --include-path digital_land_frontend/templates",
     "clean:package": "rm -rf package/digital-land-frontend",
     "copy:scss": "copyfiles 'digital_land_frontend/src/scss/**/*.scss' package/digital-land-frontend/ --up 3 && copyfiles 'digital_land_frontend/templates/components/**/*.scss' package/digital-land-frontend/ --up 2",
     "copy:templates": "copyfiles 'digital_land_frontend/templates/**/*.jinja' package/digital-land-frontend/ --up 2",
