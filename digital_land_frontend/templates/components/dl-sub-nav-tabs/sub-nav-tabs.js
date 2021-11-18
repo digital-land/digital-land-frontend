@@ -1,8 +1,8 @@
-import '../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind'
-import '../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList'
-import '../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Element/prototype/nextElementSibling'
-import '../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Element/prototype/previousElementSibling'
-import '../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Event' // addEventListener and event.target normaliziation
+import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind'
+import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Element/prototype/classList'
+import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Element/prototype/nextElementSibling'
+import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Element/prototype/previousElementSibling'
+import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Event' // addEventListener and event.target normaliziation
 
 function nodeListForEach (nodes, callback) {
   if (window.NodeList.prototype.forEach) {
