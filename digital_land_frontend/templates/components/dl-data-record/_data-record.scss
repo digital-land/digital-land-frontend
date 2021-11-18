@@ -33,8 +33,3 @@ $data-record-panel-padding: $govuk-gutter-half;
   padding: $data-record-panel-padding $data-record-panel-padding 0;
   border-top: 1px solid govuk-colour("dark-grey");
 }
-
-.dl-data-reference {
-  display: inline-block;
-  @include govuk-responsive-margin(1, "top");
-}

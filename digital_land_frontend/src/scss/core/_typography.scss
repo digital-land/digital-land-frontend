@@ -1,0 +1,8 @@
+// class to dim text colour
+.dl-secondary-text {
+  color: $govuk-secondary-text-colour;
+}
+
+.dl-small-text {
+  @include govuk-font($size: 16);
+}
