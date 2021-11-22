@@ -15,3 +15,30 @@
     display: block;
   }
 }
+
+.list-filter__count + .list-filter__count {
+  margin-top: $govuk-gutter * 1.5;
+}
+
+.list-filter__count__name {
+  margin-bottom: 0;
+}
+
+.list-filter__count__wrapper {
+  margin-top: -5px;
+}
+
+.list-filter__list {
+  padding-left: 0;
+
+  &__item {
+    list-style: none;
+    @include govuk-responsive-margin(3, "bottom");
+    @include govuk-responsive-padding(3, "bottom");
+    border-bottom: 1px solid $govuk-border-colour;
+  }
+
+  .list-filter__item-title {
+    @include govuk-font($size: 19);
+  }
+}

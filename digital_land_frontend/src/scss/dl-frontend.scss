@@ -10,3 +10,8 @@ $govuk-images-path: "/static/govuk/assets/images/";
 
 // this will import all the components from components/_all.scss
 @import "components/all";
+
+.js-hidden {
+  display: none;
+  visibility: hidden;
+}
