@@ -11,7 +11,8 @@
     "clean:package": "rm -rf package/digital-land-frontend",
     "copy:scss": "copyfiles 'digital_land_frontend/src/scss/**/*.scss' package/digital-land-frontend/ --up 3 && copyfiles 'digital_land_frontend/templates/components/**/*.scss' package/digital-land-frontend/ --up 2",
     "copy:templates": "copyfiles 'digital_land_frontend/templates/**/*.jinja' package/digital-land-frontend/ --up 2",
-    "build:package": "npm-run-all clean:package copy:scss copy:templates build:javascripts",
+    "copy:javascripts": "cp 'digital_land_frontend/src/javascripts/maps/base-tile.json' package/digital-land-frontend/javascripts/ && cp 'digital_land_frontend/src/javascripts/digital-land-cookies.js' package/digital-land-frontend/javascripts/",
+    "build:package": "npm-run-all clean:package copy:* build:javascripts",
     "watch:javascripts": "rollup --config rollup.config.js --watch",
     "lint:stylesheets": "sass-lint --config .sass-lint.yml 'digital_land_frontend/**/*.scss' --verbose --no-exit",
     "build": "npm-run-all --serial lint:* build:*"
