@@ -18,7 +18,7 @@ setup(
     author="Digital land",
     description="Reusable frontend code for digital land services and products",
     license="MIT",
-    packages=find_packages(),
+    packages=find_packages(exclude=["tests"]),
     package_data={"digital-land-frontend": components},
     python_requires=">=3.5",
     install_requires=["jinja2", "govuk-frontend-jinja", "validators"],
