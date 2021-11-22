@@ -13,6 +13,7 @@
 
 {% block head %}
 	<meta name="digital-land:template" content="{{ templateName|default('digital-land-frontend/base.jinja') }}">
+  {%- block headStart %}{% endblock headStart -%}
 
   {% block pageAssets %}
     {% block mapAssets %}
@@ -54,7 +55,7 @@
 
   {% block bodyScripts %}
     {% block analyticScripts %}
-    <script src="{{ assetPath | default('/assets') }}/javascripts/dl-cookies.js"></script>
+    <script src="{{ assetPath | default('/assets') }}/javascripts/digital-land-cookies.js"></script>
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     {% endblock analyticScripts %}
 

@@ -1,4 +1,5 @@
 import BackToTop from "../../templates/components/back-to-top/back-to-top";
+import FilterCheckboxes from "../../templates/components/dl-filter-checkboxes/filter-checkboxes";
 import FilterGroupSelectedCounter from "../../templates/components/dl-filter-group/filter-group-selected-counter";
 import HorizontalScrollableTable from "../../templates/components/dl-data-table/horizontal-scrollable-table";
 import ListFilter from "../../templates/components/dl-list-filter/list-filter";
@@ -14,6 +15,7 @@ function polyfill (options) {
 export {
   polyfill,
   BackToTop,
+  FilterCheckboxes,
   FilterGroupSelectedCounter,
   HorizontalScrollableTable,
   ListFilter,
