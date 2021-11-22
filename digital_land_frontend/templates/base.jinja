@@ -13,6 +13,7 @@
 
 {% block head %}
 	<meta name="digital-land:template" content="{{ templateName|default('digital-land-frontend/base.jinja') }}">
+  {%- block headStart %}{% endblock headStart -%}
 
   {% block pageAssets %}
     {% block mapAssets %}
@@ -65,7 +66,7 @@
     {% endblock libraryScripts %}
     
     {% block govScripts %}
-    <script src="{{ assetPath | default('/assets') }}/javascripts/govuk/govuk-frontend.js"></script>
+    <script src="{{ assetPath | default('/assets') }}/javascripts/govuk/govuk-frontend.min.js"></script>
     <script>
       // initiate all GOVUK components
       window.GOVUKFrontend.initAll();
