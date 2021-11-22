@@ -1,3 +1,5 @@
+.PHONY: package
+
 init::
 	pip install -e .[testing]
 	npm install
