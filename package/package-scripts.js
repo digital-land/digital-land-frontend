@@ -20,7 +20,8 @@ module.exports = {
       stylesheets: `node-sass ${configPaths.scssPath} -o ${configPaths.stylesheetsOutputPath} --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`
     },
     copy: {
-      javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.js" ${configPaths.jsOutputPath} -u 4`
+      javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.js" ${configPaths.jsOutputPath} -u 4`,
+      json: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.json" ${configPaths.jsOutputPath} -u 4`
     }
   }
 };
