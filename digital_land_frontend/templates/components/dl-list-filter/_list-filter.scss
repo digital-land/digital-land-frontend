@@ -1,0 +1,17 @@
+.list-filter__label {
+  display: inline;
+  padding-right: 5px;
+}
+
+.list-filter__input {
+  max-width: 200px;
+  @include govuk-media-query($from: tablet) {
+    max-width: 400px;
+  }
+}
+
+.js-enabled {
+  .list-filter__no-filter-match {
+    display: block;
+  }
+}
