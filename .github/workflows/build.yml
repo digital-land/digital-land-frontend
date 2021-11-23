@@ -1,0 +1,70 @@
+name: Generate digital-land-frontend package
+
+on:
+  push:
+    paths:
+      - 'digital_land_frontend/**'
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  DLB_BOT_EMAIL: ${{ secrets.DLB_BOT_EMAIL }}
+  DLB_BOT_TOKEN: ${{ secrets.DLB_BOT_TOKEN }}
+  DLB_BOT_USERNAME: ${{ secrets.DLB_BOT_USERNAME }}
+  SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Notify slack started
+      id: slack
+      uses: digital-land/github-action-slack-notify-build@main
+      with:
+        channel: dl-github
+        status: STARTED
+        color: "#00DFFC"
+
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+
+    - name: Setup git
+      run: |
+        git config user.email "${DLB_BOT_EMAIL}"
+        git config user.name "${DLB_BOT_USERNAME}"
+        git remote set-url origin https://${DLB_BOT_USERNAME}:${DLB_BOT_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+        git checkout main
+
+    - name: Make init
+      run: make init
+
+    - name: Build package
+      run: make package
+
+    - name: Commit package
+      run: make commit-package
+
+    - name: Notify slack success
+      if: success()
+      uses: digital-land/github-action-slack-notify-build@main
+      with:
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: dl-github
+        status: SUCCESS
+        color: good
+
+    - name: Notify slack fail
+      if: failure()
+      uses: digital-land/github-action-slack-notify-build@main
+      with:
+        message_id: ${{ steps.slack.outputs.message_id }}
+        channel: dl-github
+        status: FAILED
+        color: danger
