@@ -348,7 +348,7 @@
 
   function FilterCheckboxes ($module) {
     this.$module = $module;
-    this.$textbox = $module.querySelector('.filter-group__auto-filter__input');
+    this.$textbox = $module.querySelector('.dl-filter-group__auto-filter__input');
   }
 
   FilterCheckboxes.prototype.init = function (params) {
@@ -374,7 +374,7 @@
       return chbx.checked
     };
 
-    this.ariaDescription = $module.querySelector('.filter-group__auto-filter__desc');
+    this.ariaDescription = $module.querySelector('.dl-filter-group__auto-filter__desc');
     // To do: check it exists
     // set initial aria message
     var boundUpdateAriaDescribedBy = this.updateAriaDescribedBy.bind(this);
