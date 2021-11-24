@@ -13,6 +13,7 @@
 .js-enabled {
   .dl-list-filter__no-filter-match {
     display: block;
+    @include govuk-font($size: 19);
   }
 }
 

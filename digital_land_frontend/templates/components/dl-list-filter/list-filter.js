@@ -9,7 +9,7 @@ function convertNodeListToArray (nl) {
 function ListFilter ($form) {
   this.$form = $form
   this.filterTimeout = null
-  this.$noMatches = document.querySelector('.js-no-list-filter-matches')
+  this.$noMatches = document.querySelector('.dl-list-filter__no-filter-match')
 }
 
 ListFilter.prototype.init = function (params) {
@@ -117,8 +117,8 @@ ListFilter.prototype.updateListCounts = function (lists) {
 
 ListFilter.prototype.setupOptions = function (params) {
   params = params || {}
-  this.list_section_selector = params.list_section_selector || '.list-filter__count'
-  this.count_wrapper_selector = params.count_wrapper_selector || '.list-filter__count__wrapper'
+  this.list_section_selector = params.list_section_selector || '.dl-list-filter__count'
+  this.count_wrapper_selector = params.count_wrapper_selector || '.dl-list-filter__count__wrapper'
 }
 
 export default ListFilter
