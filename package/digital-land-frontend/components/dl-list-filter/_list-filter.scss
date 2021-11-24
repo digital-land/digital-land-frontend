@@ -1,9 +1,9 @@
-.list-filter__label {
+.dl-list-filter__label {
   display: inline;
   padding-right: 5px;
 }
 
-.list-filter__input {
+.dl-list-filter__input {
   max-width: 200px;
   @include govuk-media-query($from: tablet) {
     max-width: 400px;
@@ -11,32 +11,32 @@
 }
 
 .js-enabled {
-  .list-filter__no-filter-match {
+  .dl-list-filter__no-filter-match {
     display: block;
   }
 }
 
-.list-filter__count + .list-filter__count {
+.dl-list-filter__count + .dl-list-filter__count {
   margin-top: $govuk-gutter * 1.5;
 }
 
-.list-filter__count__name {
+.dl-list-filter__count__name {
   margin-bottom: 0;
 }
 
-.list-filter__count__wrapper {
+.dl-list-filter__count__wrapper {
   margin-top: -5px;
 }
 
-.list-filter__list {
+.dl-list-filter__list {
   padding-left: 0;
 
-  .list-filter__item-title {
+  .dl-list-filter__item-title {
     @include govuk-font($size: 19);
   }
 }
 
-.list-filter__item {
+.dl-list-filter__item {
   list-style: none;
   @include govuk-responsive-margin(3, "bottom");
   @include govuk-responsive-padding(3, "bottom");
