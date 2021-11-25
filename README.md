@@ -36,6 +36,19 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 
  - Frontend components will use Jinja templates and will be organised so that the associated Sass/CSS and Javascript will exist in the same directory.
 
+ ### Creating a component
+
+ When creating a component you should follow these steps:
+
+ - create a directory in `digital_land_frontend/templates/components`
+ - in that directory add
+   - `macro.jinja` - for the template
+   - `_<component_name>.scss` - for the associated styles
+   - `<component_name>.js` - for the associate javascript (if applicable)
+- import the `.scss` into `digital_land_frontend/src/scss/dl-frontend.scss`
+- import the `.js` modules into `digital_land_frontend/src/javascripts/dligital-land-frontend.js`
+- check files pass linting
+
 ## Partials 
 
 - A partial is a shared piece of jinja which is the same across any digital land application. If the content or structure of the partial needs differ depending on it's context then it should be abstracted as a reusable component.
