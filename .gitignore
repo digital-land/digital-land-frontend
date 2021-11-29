@@ -8,3 +8,5 @@ assets/
 __pycache__/
 *.py[cod]
 .eggs
+
+build/
