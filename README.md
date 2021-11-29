@@ -67,15 +67,8 @@ Then install the npm package by running
 ```
 npm install https://github.com/digital-land/digital-land-frontend/tree/main/package
 ```
-This gives you access to the scss, the stylesheet build scripts and the compiled js.
+This gives you access to the scss, the compiled js and the npm build scripts you can use in your projects.
 
-You will also need to install these npm dependencies
-```
-npm install copyfiles
-npm install govuk-frontend
-npm install node-sass
-npm install nps
-```
 
 Once installed add the following line to `package.json` `scripts`
 ```
@@ -99,6 +92,12 @@ To change where these files are outputted create a `digital-land-frontend.config
 * scssPath
 * stylesheetsOutputPath
 * jsOutputPath
+* rollupConfig
+
+If your project needs custom js you can use the pre-installed rollup task by creating a `rollup.config.js` file and once you are ready, running
+```
+npm run nps build.javascripts
+```
 
 # Tasks
 

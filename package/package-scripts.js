@@ -17,7 +17,8 @@ if (fs.existsSync(optionalConfigPath)) {
 module.exports = {
   scripts: {
     build: {
-      stylesheets: `node-sass ${configPaths.scssPath} -o ${configPaths.stylesheetsOutputPath} --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`
+      stylesheets: `node-sass ${configPaths.scssPath} -o ${configPaths.stylesheetsOutputPath} --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`,
+      javascripts: `rollup --config ${configPaths.rollupConfig}`
     },
     copy: {
       javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.js" ${configPaths.jsOutputPath} -u 4`,

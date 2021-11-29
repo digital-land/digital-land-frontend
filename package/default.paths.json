@@ -3,5 +3,6 @@
   "govukFrontendPath": "node_modules/govuk-frontend/",
   "scssPath": "./src/scss",
   "stylesheetsOutputPath": "assets/stylesheets",
-  "jsOutputPath": "assets/javascripts"
+  "jsOutputPath": "assets/javascripts",
+  "rollupConfig": "./rollup.config.js"
 }
