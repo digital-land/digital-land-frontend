@@ -25,4 +25,4 @@ module.exports = {
       json: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.json" ${configPaths.jsOutputPath} -u 4`
     }
   }
-};
+}
