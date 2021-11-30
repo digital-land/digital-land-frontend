@@ -32,6 +32,12 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 {%- block headEnd %}...{%- endblock headEnd %}
 ```
 
+### Directories
+
+* `layouts/` - page layout templates
+* `components/` - individual components
+* `partials/` - jinja/html snippets where we want the content to be consistent
+
  ## Components
 
  - Frontend components will use Jinja templates and will be organised so that the associated Sass/CSS and Javascript will exist in the same directory.
