@@ -18,7 +18,7 @@
   {% block pageAssets %}
     {% block mapAssets %}
       {%- if includesMap -%}
-        {% include 'digital-land-frontend/partials/dl-map-assets.jinja' %}
+        {% include 'digital-land-frontend/partials/map-assets.jinja' %}
       {%- endif %}
     {% endblock mapAssets %}
 
@@ -32,22 +32,22 @@
 
 {% block header %}
   {% block cookieBanner %}
-    {% include 'digital-land-frontend/partials/dl-cookie-banner.jinja' %}
+    {% include 'digital-land-frontend/partials/cookie-banner.jinja' %}
   {% endblock cookieBanner %}
 
   {% block mastHead %}
-    {% include 'digital-land-frontend/partials/dl-header.jinja' %}
+    {% include 'digital-land-frontend/partials/header.jinja' %}
   {% endblock mastHead %}
 {% endblock header %}
 
 {% block beforeContent %}
-	{% include 'digital-land-frontend/partials/dl-prototype-banner.jinja' %}
+	{% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
 	{% block breadcrumbs %}{% endblock breadcrumbs %}
 {% endblock beforeContent %}
 
 {% block footer %}
 	{% block footerStart %}{% endblock footerStart %}
-	{% include 'digital-land-frontend/partials/dl-footer.jinja' %}
+	{% include 'digital-land-frontend/partials/footer.jinja' %}
 {% endblock %}
 
 {% block bodyEnd %}
