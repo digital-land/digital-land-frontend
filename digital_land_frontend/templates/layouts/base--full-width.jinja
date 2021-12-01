@@ -1,14 +1,14 @@
-{% extends "digital-land-frontend/base.jinja" %}
+{% extends "digital-land-frontend/layouts/base.jinja" %}
 {% set templateName = "digital-land-frontend/base--full-width.jinja" %}
 
 {% block mastHead  %}
-{% include 'digital-land-frontend/partials/dl-header--full-width.jinja' %}
+{% include 'digital-land-frontend/partials/header--full-width.jinja' %}
 {% endblock mastHead %}
 
 {% block main %}
 <div class="dl-container--full-width {{ containerClasses }}">
     {% block beforeContent %}
-    {% include 'digital-land-frontend/partials/dl-prototype-banner.jinja' %}
+    {% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
     {% block dl_breadcrumbs %}{% endblock %}
     {% endblock%}
     <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main"{% if mainLang %} lang="{{ mainLang }}"{% endif %}>
