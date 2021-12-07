@@ -4,5 +4,6 @@
   "scssPath": "./src/scss",
   "stylesheetsOutputPath": "assets/stylesheets",
   "jsOutputPath": "assets/javascripts",
+  "imagesOutputPath": "assets/images",
   "rollupConfig": "./rollup.config.js"
 }
