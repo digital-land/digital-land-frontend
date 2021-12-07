@@ -5,5 +5,6 @@
   "stylesheetsOutputPath": "assets/stylesheets",
   "jsOutputPath": "assets/javascripts",
   "imagesOutputPath": "assets/images",
+  "govukOutputPath": "assets/",
   "rollupConfig": "./rollup.config.js"
 }
