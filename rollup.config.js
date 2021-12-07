@@ -11,7 +11,7 @@ module.exports = [
   {
     input: "node_modules/govuk-frontend/govuk/all.js",
     output: {
-      file: "package/digital-land-frontend/javascripts/vendor/govuk-frontend.js",
+      file: "package/digital-land-frontend/javascripts/govuk/govuk-frontend.js",
     },
     context: "window",
   },
