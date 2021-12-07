@@ -18,7 +18,7 @@ module.exports = [
   {
     input: "digital_land_frontend/src/javascripts/digital-land-maps.js",
     output: {
-      file: "package/digital-land-frontend/javascripts/digital-land-map.js",
+      file: "package/digital-land-frontend/javascripts/digital-land-maps.js",
       format: 'umd',
       name: "DLMaps"
     },
