@@ -18,9 +18,7 @@ git clone git@github.com:digital-land/digital-land-frontend.git
 3. Make sure you are using the correct Node version. Users of RVM can type `rvm use`
 2. Run `npm install` to install all the node packages
 
-
 We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
-
 
 ## Templates
 
@@ -54,6 +52,22 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 - import the `.scss` into `digital_land_frontend/src/scss/dl-frontend.scss`
 - import the `.js` modules into `digital_land_frontend/src/javascripts/dligital-land-frontend.js`
 - check files pass linting
+
+## CSS
+
+When writing Sass/CSS you should follow the established class naming convention:
+
+### App/Service specific components
+
+New components not applicable or ready to be added to this repository should be name spaced as 'app-[componentname]' for example:
+
+`.app-numeric-counter`
+
+### Shared components for Digital Land apps/services
+
+Components within this respository deemed a solution to a common problem and of sufficient quality to be shared across all digital land apps and services, namespace with 'dl-[componentname]' for example:
+
+`.dl-data-table`
 
 ## Partials 
 
