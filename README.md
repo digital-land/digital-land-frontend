@@ -53,6 +53,16 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 - import the `.js` modules into `digital_land_frontend/src/javascripts/dligital-land-frontend.js`
 - check files pass linting
 
+### The component life-cycle
+
+When building the frontend for digital-land apps, we follow a modular "BEM"-like structure based on the [GOVUK Design System](https://design-system.service.gov.uk/). We have some principles for using, designing and building components:
+
+1. Default to using [GOVUK Components](https://design-system.service.gov.uk/components/) first which have the benefit of being used and research in many services and the overight of a working group who assess them against the service standard.
+
+2. If a new component or design pattern is deemed neccessary it should first be prototyped and tested within the context of the specific service the need arose. This is when it would be given an 'app-' namespace (see [CSS](#css))
+
+3. If the same user need arises in a different digital-land service then the work should be done to 'promote' the component to digital-land-frontend, this means the same design solution can be kept in sync across both apps, each benefitting from the iterations and research done across both services.
+
 ## CSS
 
 When writing Sass/CSS you should follow the established class naming convention:
