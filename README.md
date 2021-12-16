@@ -57,7 +57,7 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 
 When building the frontend for digital-land apps, we follow a modular "BEM"-like structure based on the [GOVUK Design System](https://design-system.service.gov.uk/). We have some principles for using, designing and building components:
 
-1. Default to using [GOVUK Components](https://design-system.service.gov.uk/components/) first which have the benefit of being used and research in many services and the overight of a working group who assess them against the service standard.
+1. Default to using [GOVUK Components](https://design-system.service.gov.uk/components/) first which have the benefit of being used and researched in many services across government as well as the overight of a working group who assess them against the service standard.
 
 2. If a new component or design pattern is deemed neccessary it should first be prototyped and tested within the context of the specific service the need arose. This is when it would be given an 'app-' namespace (see [CSS](#css))
 
