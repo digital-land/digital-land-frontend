@@ -39,7 +39,7 @@ LayerControls.prototype.init = function (params) {
   // initial set up of controls (default or urlParams)
   const urlParams = (new URL(document.location)).searchParams
   console.log('PARAMS', urlParams)
-  if (!urlParams.has('layer')) {
+  if (!urlParams.has(this.layerURLParamName)) {
     // if not set then use default checked controls
     console.log('NO layer params exist')
     this.updateURL()
@@ -213,10 +213,10 @@ LayerControls.prototype.setControls = function () {
   const urlParams = (new URL(document.location)).searchParams
 
   let enabledLayerNames = []
-  if (urlParams.has('layer')) {
+  if (urlParams.has(this.layerURLParamName)) {
     // get the names of the enabled and disabled layers
     // only care about layers that exist
-    enabledLayerNames = urlParams.getAll('layer').filter(name => this.datasetNames.indexOf(name) > -1)
+    enabledLayerNames = urlParams.getAll(this.layerURLParamName).filter(name => this.datasetNames.indexOf(name) > -1)
     console.log('Enable:', enabledLayerNames)
   }
 
@@ -240,8 +240,8 @@ LayerControls.prototype.updateURL = function () {
   const urlParams = (new URL(document.location)).searchParams
   const enabledLayers = this.enabledLayers().map($control => this.getDatasetName($control))
 
-  urlParams.delete('layer')
-  enabledLayers.forEach(name => urlParams.append('layer', name))
+  urlParams.delete(this.layerURLParamName)
+  enabledLayers.forEach(name => urlParams.append(this.layerURLParamName, name))
   console.log(urlParams.toString())
   const newURL = window.location.pathname + '?' + urlParams.toString() + window.location.hash
   // add entry to history, does not fire event so need to call setControls
@@ -311,7 +311,8 @@ LayerControls.prototype.setupOptions = function (params) {
   this.layerControlDeactivatedClass = params.layerControlDeactivatedClass || 'deactivated-control'
   this.onEachFeature = params.onEachFeature || this.defaultOnEachFeature
   this.baseUrl = params.baseUrl || 'http://digital-land.github.io'
-  this.controlsContainerClass = params.controlsContainerClass || 'dl-map__side-panel'
+  this.controlsContainerClass = params.controlsContainerClass || 'dl-map__side-panel',
+  this.layerURLParamName = params.layerURLParamName || 'layer'
 }
 
 export default LayerControls
