@@ -18,9 +18,7 @@ git clone git@github.com:digital-land/digital-land-frontend.git
 3. Make sure you are using the correct Node version. Users of RVM can type `rvm use`
 2. Run `npm install` to install all the node packages
 
-
 We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
-
 
 ## Templates
 
@@ -54,6 +52,32 @@ When writing blocks in Jinja ensure the name is added to the endblock statement 
 - import the `.scss` into `digital_land_frontend/src/scss/dl-frontend.scss`
 - import the `.js` modules into `digital_land_frontend/src/javascripts/dligital-land-frontend.js`
 - check files pass linting
+
+### The component life-cycle
+
+When building the frontend for digital-land apps, we follow a modular "BEM"-like structure based on the [GOVUK Design System](https://design-system.service.gov.uk/). We have some principles for using, designing and building components:
+
+1. Default to using [GOVUK Components](https://design-system.service.gov.uk/components/) first which have the benefit of being used and researched in many services across government as well as the overight of a working group who assess them against the service standard.
+
+2. If a new component or design pattern is deemed neccessary it should first be prototyped and tested within the context of the specific service the need arose. This is when it would be given an 'app-' namespace (see [CSS](#css))
+
+3. If the same user need arises in a different digital-land service then the work should be done to 'promote' the component to digital-land-frontend, this means the same design solution can be kept in sync across both apps, each benefitting from the iterations and research done across both services.
+
+## CSS
+
+When writing Sass/CSS you should follow the established class naming convention:
+
+### App/Service specific components
+
+New components not applicable or ready to be added to this repository should be name spaced as 'app-[componentname]' for example:
+
+`.app-numeric-counter`
+
+### Shared components for Digital Land apps/services
+
+Components within this respository deemed a solution to a common problem and of sufficient quality to be shared across all digital land apps and services, namespace with 'dl-[componentname]' for example:
+
+`.dl-data-table`
 
 ## Partials 
 
