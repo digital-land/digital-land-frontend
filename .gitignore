@@ -9,4 +9,5 @@ __pycache__/
 *.py[cod]
 .eggs
 
+.venv/
 build/
