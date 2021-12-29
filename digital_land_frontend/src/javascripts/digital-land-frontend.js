@@ -30,7 +30,9 @@ function initAll (options) {
   })
 
   var $formToFilterList = scope.querySelector('[data-module="dl-list-filter-form"]')
-  new ListFilter($formToFilterList).init()
+  if ($formToFilterList) {
+    new ListFilter($formToFilterList).init()
+  }
 }
 
 export {
