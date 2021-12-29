@@ -1,10 +1,10 @@
-.back-to-top {
+.dl-back-to-top {
   margin-top: govuk-spacing(4);
   margin-bottom: govuk-spacing(6);
 }
 
 @include govuk-media-query($from: tablet) {
-  .back-to-top {
+  .dl-back-to-top {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -12,19 +12,19 @@
     margin-bottom: govuk-spacing(8);
   }
 
-  .js-enabled .back-to-top--fixed {
+  .js-enabled .dl-back-to-top--fixed {
     position: fixed;
     top: calc(100% - #{govuk-spacing(8)});
     bottom: auto;
     left: auto;
   }
 
-  .js-enabled .back-to-top--hidden .back-to-top__link {
+  .js-enabled .dl-back-to-top--hidden .dl-back-to-top__link {
     @include govuk-visually-hidden-focusable;
   }
 }
 
-.back-to-top__icon {
+.dl-back-to-top__icon {
   display: inline-block;
   width: .8em;
   height: 1em;
@@ -34,7 +34,7 @@
 }
 
 .js-enabled {
-  .back-to-top--banner {
+  .dl-back-to-top--banner {
     box-sizing: border-box;
     top: auto;
     bottom: 0;

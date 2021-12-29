@@ -331,8 +331,8 @@
 
   BackToTop.prototype.setupOptions = function (params) {
     params = params || {};
-    this.endElementSelector = params.endElementSelector || ".app-footer";
-    this.startElementSelector = params.startElementSelector || ".app-subnav";
+    this.endElementSelector = params.endElementSelector || ".back-to-top__end";
+    this.startElementSelector = params.startElementSelector || ".back-to-top__start";
     this.hideClass = params.hideClass || "back-to-top--hidden";
     this.fixClass = params.fixClass || "back-to-top--fixed";
   };
@@ -459,9 +459,13 @@
     this.listItemSelector = params.listItemSelector || '.govuk-checkboxes__item';
   };
 
-  // ================================
-  // Selected counts for filters
-  // ================================
+  /*
+    Selected counts for filter
+
+    Used with the FilterGroup component to display the
+    number of selected items in the filter group list.
+
+  */
 
   function FilterGroupSelectedCounter ($module) {
     this.$module = $module;
@@ -470,7 +474,6 @@
   }
 
   FilterGroupSelectedCounter.prototype.init = function () {
-    this.$module;
     var $inputs = this.$inputs;
 
     // if no inputs then return
