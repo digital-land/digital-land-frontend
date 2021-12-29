@@ -49,6 +49,11 @@ function initAll (options) {
   if ($subNavTabs) {
     new SubNavTabs($subNavTabs).init({})
   }
+
+  var $scrollableTables = scope.querySelectorAll('[data-module="scrollable-table"]')
+  $scrollableTables.forEach(function($table) {
+    new HorizontalScrollableTable($table).init()
+  })
 }
 
 export {
