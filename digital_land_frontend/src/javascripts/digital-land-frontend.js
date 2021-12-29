@@ -33,6 +33,16 @@ function initAll (options) {
   if ($formToFilterList) {
     new ListFilter($formToFilterList).init()
   }
+
+  var $filters = scope.querySelectorAll('[data-module="selected-counter"]')
+  $filters.forEach(function($filter) {
+    new FilterGroupSelectedCounter($filter).init()
+  })
+
+  var $filterCheckboxes = scope.querySelectorAll('[data-module="filter-checkboxes"]')
+  $filterCheckboxes.forEach(function($el) {
+    new FilterCheckboxes($el).init()
+  })
 }
 
 export {
