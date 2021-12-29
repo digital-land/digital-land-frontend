@@ -4,6 +4,10 @@
   (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.DLFrontend = {}));
 })(this, (function (exports) { 'use strict';
 
+  function convertNodeListToArray$1 (nl) {
+    return Array.prototype.slice.call(nl)
+  }
+
   (function (global, factory) {
   	typeof exports === 'object' && typeof module !== 'undefined' ? factory() :
   	typeof define === 'function' && define.amd ? define('GOVUKFrontend', factory) :
@@ -613,6 +617,10 @@
   function convertNodeListToArray (nl) {
     return Array.prototype.slice.call(nl)
   }
+
+  // Currently works by looking for all lists and list items on the page, not confined to a section of a page.
+  // We might want to change this so that it is more flexible.
+  // Is there a situation where we need more than one list search on a page?
 
   // similar to
   // https://github.com/alphagov/collections/blob/e1f3c74facd889426d24ac730ed0057aa64e2801/app/assets/javascripts/organisation-list-filter.js
@@ -2644,12 +2652,56 @@
     }
   }
 
+  function initAll (options) {
+    // Set the options to an empty object by default if no options are passed.
+    options = typeof options !== 'undefined' ? options : {};
+
+    // Allow the user to initialise Digital Land Frontend in only certain sections of the page
+    // Defaults to the entire document if nothing is set.
+    var scope = typeof options.scope !== 'undefined' ? options.scope : document;
+
+    // load required polyfills
+    polyfill();
+
+    var $bttButtons = convertNodeListToArray$1(scope.querySelectorAll('[data-module="dl-back-to-top-button"]'));
+    $bttButtons.forEach(function ($button) {
+      new BackToTop($button).init();
+    });
+
+    var $formToFilterList = scope.querySelector('[data-module="dl-list-filter-form"]');
+    if ($formToFilterList) {
+      new ListFilter($formToFilterList).init();
+    }
+
+    var $filters = scope.querySelectorAll('[data-module="selected-counter"]');
+    $filters.forEach(function($filter) {
+      new FilterGroupSelectedCounter($filter).init();
+    });
+
+    var $filterCheckboxes = scope.querySelectorAll('[data-module="filter-checkboxes"]');
+    $filterCheckboxes.forEach(function($el) {
+      new FilterCheckboxes($el).init();
+    });
+
+    var $subNavTabs = scope.querySelector('[data-module="dl-subnav"]');
+    // check element was found before initialising
+    if ($subNavTabs) {
+      new SubNavTabs($subNavTabs).init({});
+    }
+
+    var $scrollableTables = scope.querySelectorAll('[data-module="scrollable-table"]');
+    $scrollableTables.forEach(function($table) {
+      new HorizontalScrollableTable($table).init();
+    });
+  }
+
   exports.BackToTop = BackToTop;
   exports.FilterCheckboxes = FilterCheckboxes;
   exports.FilterGroupSelectedCounter = FilterGroupSelectedCounter;
   exports.HorizontalScrollableTable = HorizontalScrollableTable;
   exports.ListFilter = ListFilter;
   exports.SubNavTabs = SubNavTabs;
+  exports.initAll = initAll;
   exports.polyfill = polyfill;
 
   Object.defineProperty(exports, '__esModule', { value: true });
