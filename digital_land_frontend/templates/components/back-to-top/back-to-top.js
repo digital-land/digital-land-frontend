@@ -75,8 +75,8 @@ BackToTop.prototype.passedBottom = function ($el) {
 
 BackToTop.prototype.setupOptions = function (params) {
   params = params || {};
-  this.endElementSelector = params.endElementSelector || ".app-footer";
-  this.startElementSelector = params.startElementSelector || ".app-subnav";
+  this.endElementSelector = params.endElementSelector || ".back-to-top__end";
+  this.startElementSelector = params.startElementSelector || ".back-to-top__start";
   this.hideClass = params.hideClass || "back-to-top--hidden";
   this.fixClass = params.fixClass || "back-to-top--fixed";
 };
