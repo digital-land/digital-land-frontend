@@ -43,6 +43,12 @@ function initAll (options) {
   $filterCheckboxes.forEach(function($el) {
     new FilterCheckboxes($el).init()
   })
+
+  var $subNavTabs = scope.querySelector('[data-module="dl-subnav"]')
+  // check element was found before initialising
+  if ($subNavTabs) {
+    new SubNavTabs($subNavTabs).init({})
+  }
 }
 
 export {
