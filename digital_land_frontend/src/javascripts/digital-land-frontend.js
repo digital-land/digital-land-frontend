@@ -1,3 +1,4 @@
+import { convertNodeListToArray } from "./helpers/nodelist_to_array";
 import BackToTop from "../../templates/components/back-to-top/back-to-top";
 import FilterCheckboxes from "../../templates/components/filter-checkboxes/filter-checkboxes";
 import FilterGroupSelectedCounter from "../../templates/components/filter-group/filter-group-selected-counter";
@@ -12,7 +13,25 @@ function polyfill (options) {
   }
 }
 
+function initAll (options) {
+  // Set the options to an empty object by default if no options are passed.
+  options = typeof options !== 'undefined' ? options : {}
+
+  // Allow the user to initialise Digital Land Frontend in only certain sections of the page
+  // Defaults to the entire document if nothing is set.
+  var scope = typeof options.scope !== 'undefined' ? options.scope : document
+
+  // load required polyfills
+  polyfill()
+
+  var $bttButtons = convertNodeListToArray(scope.querySelectorAll('[data-module="dl-back-to-top-button"]'))
+  $bttButtons.forEach(function ($button) {
+    new BackToTop($button).init()
+  })
+}
+
 export {
+  initAll,
   polyfill,
   BackToTop,
   FilterCheckboxes,
