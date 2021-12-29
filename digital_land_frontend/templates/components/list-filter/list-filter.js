@@ -4,6 +4,10 @@ function convertNodeListToArray (nl) {
   return Array.prototype.slice.call(nl)
 }
 
+// Currently works by looking for all lists and list items on the page, not confined to a section of a page.
+// We might want to change this so that it is more flexible.
+// Is there a situation where we need more than one list search on a page?
+
 // similar to
 // https://github.com/alphagov/collections/blob/e1f3c74facd889426d24ac730ed0057aa64e2801/app/assets/javascripts/organisation-list-filter.js
 function ListFilter ($form) {

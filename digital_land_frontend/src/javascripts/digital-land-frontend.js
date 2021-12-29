@@ -28,6 +28,9 @@ function initAll (options) {
   $bttButtons.forEach(function ($button) {
     new BackToTop($button).init()
   })
+
+  var $formToFilterList = scope.querySelector('[data-module="dl-list-filter-form"]')
+  new ListFilter($formToFilterList).init()
 }
 
 export {
