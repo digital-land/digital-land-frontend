@@ -1,8 +1,12 @@
 import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind'
 
-// ================================
-// Selected counts for filters
-// ================================
+/*
+  Selected counts for filter
+
+  Used with the FilterGroup component to display the
+  number of selected items in the filter group list.
+
+*/
 
 function FilterGroupSelectedCounter ($module) {
   this.$module = $module
@@ -11,7 +15,6 @@ function FilterGroupSelectedCounter ($module) {
 }
 
 FilterGroupSelectedCounter.prototype.init = function () {
-  var $module = this.$module
   var $inputs = this.$inputs
 
   // if no inputs then return
