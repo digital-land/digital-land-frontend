@@ -76,8 +76,7 @@
     {% block digitalLandScripts %}
     <script src="{{ assetPath | default('/assets') }}/javascripts/digital-land-frontend.js"></script>
     <script>
-      // adds any necessary polyfills
-      window.DLFrontend.polyfill();
+      window.DLFrontend.initAll();
     </script>
     {% endblock digitalLandScripts %}
 
