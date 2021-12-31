@@ -52,6 +52,12 @@ def register_templates(app):
 
 Don't forget to call this function from the `create_app()` (or equivalent) function.
 
+You will also need to set the `assetPath` global variable. In `factory.py` add this to `register_context_processors()`.
+```
+def base_context_processor():
+  return {"assetPath": "/static"}
+``` 
+
 ### Set up stylesheet compiler
 
 You need to update the include paths for libsass. Do this in `assets.py`. Update include paths to be:
