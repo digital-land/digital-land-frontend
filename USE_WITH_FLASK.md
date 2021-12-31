@@ -19,8 +19,8 @@ And add the node package to your `package.json` file.
 Also add an `nps` script to `package.json`.
 ```
 "scripts": {
-    "nps": "nps -c ./node_modules/digital-land-frontend/package-scripts.js"
-  }
+  "nps": "nps -c ./node_modules/digital-land-frontend/package-scripts.js"
+}
 ```
 
 ### Register templates
@@ -112,3 +112,21 @@ npm run nps build.javascripts
 ```
 
 to compile your js files.
+
+#### Bringing it together
+
+To get the js ready for the flask app there are now 3 commands to run. It is worth adding these to a make target in a Makefile so you only have to run `make javascripts`. The target should look like:
+```
+javascripts:
+	npm run copyjs
+	npm run nps copy.javascripts
+	npm run nps build.javascripts
+```
+
+If you are auto-deploying your flask app (for example, on Heroku) you will also need to add a `postinstall` script to `package.json` so that these commands are run on deploy. Add
+```
+"scripts": {
+  ...,
+  "postinstall": "npm run copyjs && npm run nps copy.javascripts && npm run nps build.javascripts"
+}
+```
