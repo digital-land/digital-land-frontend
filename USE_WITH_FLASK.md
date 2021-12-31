@@ -16,6 +16,13 @@ And add the node package to your `package.json` file.
 }
 ```
 
+Also add an `nps` script to `package.json`.
+```
+"scripts": {
+    "nps": "nps -c ./node_modules/digital-land-frontend/package-scripts.js"
+  }
+```
+
 ### Register templates
 
 You will need to register the templates with flask to be able to use and extend them.
@@ -68,4 +75,40 @@ Then, in your `main.scss` file import just the digital land frontend (this will 
 
 ### Adding custom javascript
 
-To Do!
+You need to put your custom js files into a folder different to the static folder they will get served from. This will allow digital-land-frontend to copy the right files to the right place when compiling your custom js.
+
+We recommend putting your custom js in `assets/javascripts`.
+
+Then create a `copyjs` script in `package.json->scripts`. This should copy again js files that don't need to be compiled via rollup.
+
+Next, create a `digital-land-frontend.config.json` file. In here, set a path to the javascript folder flask serves. E.g.
+
+```
+{
+  "jsOutputPath": "application/static/javascripts"
+}
+```
+Now, when you run `npm run nps copy.javascripts` the javascripts from digital-land-frontend will be copy to the correct folder.
+
+#### Compiling custom js
+
+Create a `rollup.config.js` file. Put config blocks in here for any js files you want rollup to compile. E.g.
+
+```
+module.exports = [
+  {
+    input: `assets/javascripts/test.js`,
+    output: {
+      file: `application/static/javascripts/test.js`,
+      format: "iife",
+    }
+  }
+];
+```
+
+Now you can run
+```
+npm run nps build.javascripts
+```
+
+to compile your js files.
