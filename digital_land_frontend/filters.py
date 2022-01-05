@@ -1,7 +1,7 @@
 import numbers
 import validators
 from datetime import datetime
-from jinja2 import Markup, evalcontextfilter
+from jinja2 import Markup, pass_eval_context
 
 
 def is_list_filter(v):
@@ -20,7 +20,7 @@ def is_valid_uri_filter(uri):
     return False
 
 
-@evalcontextfilter
+@pass_eval_context
 def make_link_filter(eval_ctx, url, **kwargs):
     """
     Converts a url string into an anchor element.
