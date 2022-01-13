@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block head %}
-	<meta name="digital-land:template" content="{{ templateName|default('digital-land-frontend/base.jinja') }}">
+  <meta name="digital-land:template" content="{{ templateName|default('digital-land-frontend/base.jinja') }}">
   {%- block headStart %}{% endblock headStart -%}
 
   {% block pageAssets %}
@@ -23,7 +23,7 @@
     {% endblock mapAssets %}
 
     {%- block stylesheets %}
-    <link href="{{ assetPath | default('/assets') }}/stylesheets/dl-frontend.css" rel="stylesheet" />
+      <link href="{{ assetPath | default('/assets') }}/stylesheets/dl-frontend.css" rel="stylesheet"/>
     {% endblock stylesheets -%}
   {% endblock pageAssets %}
 
@@ -41,13 +41,15 @@
 {% endblock header %}
 
 {% block beforeContent %}
-	{% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
-	{% block breadcrumbs %}{% endblock breadcrumbs %}
+  {% block phaseBanner %}
+    {% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
+  {% endblock %}
+  {% block breadcrumbs %}{% endblock breadcrumbs %}
 {% endblock beforeContent %}
 
 {% block footer %}
-	{% block footerStart %}{% endblock footerStart %}
-	{% include 'digital-land-frontend/partials/footer.jinja' %}
+  {% block footerStart %}{% endblock footerStart %}
+  {% include 'digital-land-frontend/partials/footer.jinja' %}
 {% endblock %}
 
 {% block bodyEnd %}
@@ -55,29 +57,33 @@
 
   {% block bodyScripts %}
     {% block analyticScripts %}
-    <script src="{{ assetPath | default('/assets') }}/javascripts/digital-land-cookies.js"></script>
-    <script async src='https://www.google-analytics.com/analytics.js'></script>
+      <script src="{{ assetPath | default('/assets') }}/javascripts/digital-land-cookies.js"></script>
+      <script async src='https://www.google-analytics.com/analytics.js'></script>
     {% endblock analyticScripts %}
 
     {% block libraryScripts %}
-    	{%- if includeJQuery == "true" -%}
-	      <script src="{{ staticPath | default('/static') }}/javascripts/vendor/jquery-3.4.1.min.js"></script>
-	    {% endif %}
+      {%- if includeJQuery == "true" -%}
+        <script src="{{ staticPath | default('/static') }}/javascripts/vendor/jquery-3.4.1.min.js"></script>
+      {% endif %}
     {% endblock libraryScripts %}
-    
+
     {% block govScripts %}
-    <script src="{{ assetPath | default('/assets') }}/javascripts/govuk/govuk-frontend.js"></script>
-    <script>
-      // initiate all GOVUK components
-      window.GOVUKFrontend.initAll();
-    </script>
+      <script src="{{ assetPath | default('/assets') }}/javascripts/govuk/govuk-frontend.js"></script>
+      <script>
+        // initiate all GOVUK components
+        window
+          .GOVUKFrontend
+          .initAll();
+      </script>
     {% endblock govScripts %}
 
     {% block digitalLandScripts %}
-    <script src="{{ assetPath | default('/assets') }}/javascripts/digital-land-frontend.js"></script>
-    <script>
-      window.DLFrontend.initAll();
-    </script>
+      <script src="{{ assetPath | default('/assets') }}/javascripts/digital-land-frontend.js"></script>
+      <script>
+        window
+          .DLFrontend
+          .initAll();
+      </script>
     {% endblock digitalLandScripts %}
 
     {% block pageScripts %}{% endblock pageScripts %}
