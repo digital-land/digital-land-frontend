@@ -23,6 +23,16 @@ Also add an `nps` script to `package.json`.
 }
 ```
 
+Create a config file called `digital-land-frontend.config.json`. Use this file to override the default paths the common npm scripts use.
+
+For example, update the path to where you have your source scss files.
+```
+{
+  "scssPath": "./assets/scss",
+  ...
+}
+```
+
 ### Register templates
 
 You will need to register the templates with flask to be able to use and extend them.
@@ -58,28 +68,27 @@ def base_context_processor():
   return {"assetPath": "/static"}
 ``` 
 
-### Set up stylesheet compiler
+### Custom scss
 
-You need to update the include paths for libsass. Do this in `assets.py`. Update include paths to be:
-
+Make sure you have set the correct input and output paths in the `digital-land-frontend.config.json` config file.
 ```
-libsass_output = LibSass(
-    include_paths=[
-        static('scss'),
-        'node_modules/govuk-frontend/',
-        "node_modules/digital-land-frontend",
-    ]
-)
+{
+  "scssPath": "./assets/scss",
+  "stylesheetsOutputPath": "application/static/stylesheets",
+  ...
+}
 ```
 
-Then, in your `main.scss` file import just the digital land frontend (this will import what it needs from govuk).
+Then, in your `main.scss` file import the digital land frontend (this will also import what it needs from govuk).
 
 ```
 // import all digital land and GOVUK Frontend scss
 @import "digital-land-frontend/dl-frontend";
 ```
 
-### Adding custom javascript
+You can now compile you stylesheets by running `npm run nps build.stylesheets`.
+
+### Custom javascript
 
 You need to put your custom js files into a folder different to the static folder they will get served from. This will allow digital-land-frontend to copy the right files to the right place when compiling your custom js.
 
@@ -119,6 +128,28 @@ npm run nps build.javascripts
 
 to compile your js files.
 
+### Setup watch
+
+To setup up watch you will need to set the watch paths in `digital-land-frontend.config.json` . E.g.
+```
+{
+  "watchPaths": "'./assets/scss/**/*.scss' './assets/javascripts/**/*.js'"
+  ... 
+}
+```
+
+You can then run the watch scripts with `npm run nps watch.assets` and `npm run nps watch.pages`
+
+We recommend adding watch scripts to `package.json` so you can run these as one script. E.g.
+```
+scripts: {
+  ...,
+  "watch:assets": "npm run nps watch.assets",
+  "watch:pages": "npm run nps watch.pages",
+  "watch": "npm-run-all --parallel watch:*"
+}
+```
+
 #### Bringing it together
 
 To get the js ready for the flask app there are now 3 commands to run. It is worth adding these to a make target in a Makefile so you only have to run `make javascripts`. The target should look like:
@@ -129,10 +160,22 @@ javascripts:
 	npm run nps build.javascripts
 ```
 
+Also add a stylesheets target.
+```
+stylesheets:
+  npm run nps build.stylesheets
+```
+
 If you are auto-deploying your flask app (for example, on Heroku) you will also need to add a `postinstall` script to `package.json` so that these commands are run on deploy. Add
 ```
 "scripts": {
   ...,
-  "postinstall": "npm run copyjs && npm run nps copy.javascripts && npm run nps build.javascripts"
+  "postinstall": "npm run copyjs && npm run nps copy.javascripts && npm run nps build.javascripts && "
 }
+```
+
+You might also want to add a watch target to you Makefile. E.g.
+```
+watch:
+	npm run watch
 ```
