@@ -13,14 +13,11 @@
   "bugs": {
     "url": "https://github.com/digital-land/digital-land-frontend/issues"
   },
-  "keywords": [
-    "govuk",
-    "frontend",
-    "design system",
-    "template"
-  ],
+  "keywords": ["govuk", "frontend", "design system", "template"],
   "license": "MIT",
   "dependencies": {
+    "browser-sync": "^2.27.7",
+    "chokidar-cli": "^3.0.0",
     "copyfiles": "latest",
     "govuk-frontend": "^3.14.0",
     "node-sass": "^6.0.1",
