@@ -1,6 +1,7 @@
 const fs = require('fs')
+let scripts = {}
 
-const readJsonFile = (filePath) => {
+function readJsonFile (filePath) {
   return JSON.parse(fs.readFileSync(filePath, 'utf8'))
 }
 
@@ -10,20 +11,24 @@ const optionalConfigPath = 'digital-land-frontend.config.json'
 if (fs.existsSync(optionalConfigPath)) {
   configPaths = {
     ...configPaths,
-    ...(readJsonFile(optionalConfigPath))
+    ...readJsonFile(optionalConfigPath)
   }
 }
 
-module.exports = {
-  scripts: {
-    build: {
-      stylesheets: `node-sass ${configPaths.scssPath} -o ${configPaths.stylesheetsOutputPath} --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`,
-      javascripts: `rollup --config ${configPaths.rollupConfig}`
-    },
-    copy: {
-      javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.{js,json}" ${configPaths.jsOutputPath} -u 4`,
-      images: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/images/**/*.{png,ico}" ${configPaths.imagesOutputPath} -u 4`,
-      govukAssets: `copyfiles -u 2 "${configPaths.govukFrontendPath}govuk/assets/**" ${configPaths.govukOutputPath}`
-    }
-  }
+scripts.build = {
+  stylesheets: `npx node-sass ${configPaths.scssPath} -o ${configPaths.stylesheetsOutputPath} --include-path ${configPaths.govukFrontendPath} --include-path ${configPaths.digitalLandFrontendPath}`,
+  javascripts: `npx rollup --config ${configPaths.rollupConfig}`
 }
+
+scripts.copy = {
+  javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.{js,json}" ${configPaths.jsOutputPath} -u 4`,
+  images: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/images/**/*.{png,ico}" ${configPaths.imagesOutputPath} -u 4`,
+  govukAssets: `npx copyfiles -u 2 "${configPaths.govukFrontendPath}govuk/assets/**" ${configPaths.govukOutputPath}`
+}
+
+scripts.watch = {
+  pages: `npx browser-sync start --proxy ${configPaths.serverURL} --files ${configPaths.templatesPath} ${configPaths.staticFilesPath}`,
+  assets: `npx chokidar ${configPaths.watchPaths} -c "npm run nps build.javascripts && npm run nps build.stylesheets"`
+}
+
+module.exports = { scripts }
