@@ -41,7 +41,9 @@
 {% endblock header %}
 
 {% block beforeContent %}
-	{% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
+  {% block phaseBanner %}
+    {% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
+  {% endblock %}
 	{% block breadcrumbs %}{% endblock breadcrumbs %}
 {% endblock beforeContent %}
 
