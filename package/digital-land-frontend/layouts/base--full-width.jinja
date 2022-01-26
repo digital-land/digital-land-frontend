@@ -8,14 +8,16 @@
 {% block main %}
 <div class="dl-container--full-width {{ containerClasses }}">
     {% block beforeContent %}
-    {% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
-    {% block dl_breadcrumbs %}{% endblock %}
-    {% endblock%}
+      {% block phaseBanner %}
+        {% include 'digital-land-frontend/partials/prototype-banner.jinja' %}
+      {% endblock %}
+	    {% block breadcrumbs %}{% endblock breadcrumbs %}
+    {% endblock beforeContent %}
     <main class="govuk-main-wrapper {{ mainClasses }}" id="main-content" role="main"{% if mainLang %} lang="{{ mainLang }}"{% endif %}>
-    {% block content %}{% endblock %}
+    {% block content %}{% endblock content %}
     </main>
 </div>
-{% endblock %}
+{% endblock main %}
 
 {# setting this variable will make footer full width #}
 {% set footer_container_classes = "dl-container--full-width" %}
