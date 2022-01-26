@@ -85,9 +85,9 @@ Map.prototype.init = function (params) {
 }
 
 Map.prototype.setTiles = function () {
-  return L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+  return L.tileLayer('https://stamen-tiles.a.ssl.fastly.net/toner/{z}/{x}/{y}.png', {
     attribution:
-    '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+    '&copy; <a href="https://stamen.com/">Stamen designs</a>, &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
   })
 }
 
