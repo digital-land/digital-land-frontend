@@ -1,6 +1,6 @@
 {% macro dlHero(params) %}
 <section class="dl-hero"{% if params.id %} id="{{ params.id }}"{% endif %}>
-  <div class="dl-hero__content govuk-width-container{{ ' ' + params.classes is params.classes }}">
+  <div class="dl-hero__content govuk-width-container{{ ' ' + params.classes if params.classes }}">
     {% if caller %} {#- if statement allows usage of `call` to be optional -#}
     {{ caller() }}
     {% elif params.html %}
