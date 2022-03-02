@@ -24,3 +24,8 @@
   background: #fff;
   color: $govuk-brand-colour;
 }
+
+.dl-hero__button {
+  @include govuk-style-button($button-text-colour: govuk-colour("blue"), $button-colour: govuk-colour("white"), $button-shadow-colour: govuk-colour("black"));
+  font-weight: bold;
+}
