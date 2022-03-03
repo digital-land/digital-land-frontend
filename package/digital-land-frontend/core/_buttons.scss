@@ -1,0 +1,34 @@
+//
+// Mixin for creating different coloured buttons in the style of the 
+// GOVUK ones
+//
+// Simple usage:
+//   .button-filter-table {
+//     @include govuk-style-button($button-colour:  govuk-colour(blue));
+//   }
+//
+@mixin govuk-style-button(
+  $button-text-colour: #ffffff,
+  $button-colour: govuk-colour("green"),
+  $button-hover-colour: darken($button-colour, 5%),
+  $button-shadow-colour: darken($button-colour, 15%),
+  $button-shadow-size: $govuk-border-width-form-element
+) {
+  // start of govuk-style-button declarations
+  color: $button-text-colour;
+  background-color: $button-colour;
+  box-shadow: 0 $button-shadow-size 0 $button-shadow-colour;
+
+  &:link,
+  &:visited,
+  &:active,
+  &:hover {
+    color: $button-text-colour;
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: $button-hover-colour;
+  }
+}
