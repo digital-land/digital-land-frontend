@@ -1,0 +1,6 @@
+{% macro dlDataItem(params) %}
+<div class="dl-data-item {% if params.classes %}{{ params.classes }}{% endif %}">
+    <span class="dl-data-item__number">{{ params.number }}</span>
+    <span class="dl-data-item__label">{{ params.html | safe if params.html else params.text }}</span>
+</div>
+{% endmacro %}
