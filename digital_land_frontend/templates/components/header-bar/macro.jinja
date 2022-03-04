@@ -6,12 +6,12 @@
         <a href="{{ params.site_url|default('/') }}" class="govuk-header__link govuk-header__link--service-name">
         Digital Land
         </a>
-        <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
         {%- if params.transaction %}
         <span class="dl-header__service-name">{{ params.transaction.name }}</span>
         {% else %}
-        <nav>
-          <ul id="navigation" class="govuk-header__navigation" aria-label="Top Level Navigation">
+        <nav class="govuk-header__navigation" aria-label="{{ params.navigationLabel | default('Menu') }}">
+          <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+          <ul id="navigation" class="govuk-header__navigation-list">
             {% for item in params['items'] %}
             <li class="govuk-header__navigation-item">
               <a class="govuk-header__link" href="{{ item.href }}">{{ item.text }}</a>
