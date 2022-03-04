@@ -1,0 +1,31 @@
+.dl-data-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.dl-data-item__number {
+  @include govuk-font($size: 48, $weight: bold);
+  margin-right: 5px;
+}
+
+.dl-data-item__label {
+  display: block;
+  @include govuk-font($size: 24);
+  margin-top: 3px;
+}
+
+.dl-data-item--s {
+  .dl-data-item__number {
+    @include govuk-font($size: 36, $weight: bold);
+  }
+
+  .dl-data-item__label {
+    @include govuk-font($size: 19);
+  }
+}
+
+.dl-data-item--inline {
+  .dl-data-item__label {
+    display: inline;
+  }
+}
