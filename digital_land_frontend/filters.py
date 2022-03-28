@@ -1,7 +1,8 @@
 import numbers
 import validators
 from datetime import datetime
-from jinja2 import Markup, pass_eval_context
+from jinja2 import pass_eval_context
+from markupsafe import Markup
 
 
 def is_list_filter(v):
