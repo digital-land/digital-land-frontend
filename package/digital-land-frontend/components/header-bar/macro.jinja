@@ -1,25 +1,30 @@
-{% macro dlHeaderBar(params) %}
+{% macro dlHeaderBar(params={}) %}
 <header role="banner" id="global-header" class="govuk-header  with-proposition dl-header{{ ' dl-header--full' if params.fullWidth }}{{ ' ' + params.classes if params.classes }}" data-module="govuk-header">
   <div class="govuk-header__container{{ ' dl-container--full-width' if params.fullWidth else ' govuk-width-container' }}">
     <div class="header-proposition">
       <div class="govuk-header__content">
         <a href="{{ params.site_url|default('/') }}" class="govuk-header__link govuk-header__link--service-name">
-        Digital Land
+          {% if params.transaction and params.transaction.organisation %}
+            {{ params.transaction.organisation }}
+          {% else %}
+            {{ 'Digital Land' }}
+          {% endif %}
         </a>
-        {%- if params.transaction %}
+        {%- if params.transaction and params.transaction.name %}
         <span class="dl-header__service-name">{{ params.transaction.name }}</span>
-        {% else %}
-        <nav class="govuk-header__navigation" aria-label="{{ params.navigationLabel | default('Menu') }}">
-          <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
-          <ul id="navigation" class="govuk-header__navigation-list">
-            {% for item in params['items'] %}
-            <li class="govuk-header__navigation-item">
-              <a class="govuk-header__link" href="{{ item.href }}">{{ item.text }}</a>
-            </li>
-            {% endfor %}
-          </ul>
-        </nav>
-        {% endif -%}
+        {% endif %}
+        {% if params.links %}
+          <nav class="govuk-header__navigation" aria-label="{{ params.navigationLabel | default('Menu') }}">
+            <button type="button" class="govuk-header__menu-button govuk-js-header-toggle" aria-controls="navigation" aria-label="Show or hide Top Level Navigation">Menu</button>
+            <ul id="navigation" class="govuk-header__navigation-list">
+              {% for item in params.links %}
+              <li class="govuk-header__navigation-item">
+                <a class="govuk-header__link" href="{{ item.href }}">{{ item.text }}</a>
+              </li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endif %}
       </div>
     </div>
   </div>
