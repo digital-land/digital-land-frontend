@@ -22,7 +22,11 @@
     "type": "git",
     "url": "git+https://github.com/digital-land/digital-land-frontend.git"
   },
-  "keywords": ["frontend", "css", "jinja"],
+  "keywords": [
+    "frontend",
+    "css",
+    "jinja"
+  ],
   "author": "Digital Land Team",
   "license": "MIT",
   "bugs": {
