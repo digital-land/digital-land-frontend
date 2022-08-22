@@ -1,8 +1,14 @@
 .dl-header {
+  
   .govuk-header__content {
     width: 100%;
     padding-left: 0;
   }
+
+  .govuk-header__menu-button {
+    top: .7em;
+  }
+
 }
 
 .dl-header--full {
