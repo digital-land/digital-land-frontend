@@ -1,6 +1,8 @@
 @import "scss/all";
 
 .dl-map__wrapper {
+
+  border: 1px solid $govuk-border-colour;
   position: relative;
   min-height: 700px;
 

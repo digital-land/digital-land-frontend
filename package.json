@@ -16,7 +16,7 @@
     "build:package": "npm-run-all clean:package build:javascripts copy:*",
     "watch:javascripts": "rollup --config rollup.config.js --watch",
     "lint:stylesheets": "sass-lint --config .sass-lint.yml 'digital_land_frontend/**/*.scss' --verbose --no-exit",
-    "build": "npm-run-all --serial lint:* build:*"
+    "build": "npm-run-all --serial build:*"
   },
   "repository": {
     "type": "git",
