@@ -5,7 +5,7 @@
   "engines": {
     "node": ">= 4.2.0"
   },
-  "author": "Digital Land team",
+  "author": "Planning Data team",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/digital-land/digital-land-frontend.git"
