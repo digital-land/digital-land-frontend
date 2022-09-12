@@ -4,7 +4,7 @@
     "zoom": 1,
     "pitch": 0,
     "center": [0, 0],
-    "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=kira3KM2jYGvDA4xNkYt",
+    "glyphs": "https://api.maptiler.com/fonts/{fontstack}/{range}.pbf?key=cNgSNNEwxUaJsee4tAEd",
     "layers": [{
         "id": "background",
         "type": "background",
@@ -3473,7 +3473,7 @@
     "bearing": 0,
     "sources": {
         "openmaptiles": {
-            "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=kira3KM2jYGvDA4xNkYt",
+            "url": "https://api.maptiler.com/tiles/v3/tiles.json?key=cNgSNNEwxUaJsee4tAEd",
             "type": "vector"
         },
         "maptiler_attribution": {
