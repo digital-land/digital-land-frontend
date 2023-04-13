@@ -49,6 +49,40 @@ function setTrackingCookies () {
   }
 }
 
+class cookiePrefs{
+  static essential = true;
+  static settings = false;
+  static usage = false;
+  static campaigns = false;
+
+  static get = () => {
+    var cookiesPolicy = JSON.parse(getCookie('cookies_policy'));
+    if(cookiesPolicy){
+      this.setEssential(cookiesPolicy.essential);
+      this.setSettings(cookiesPolicy.settings);
+      this.setUsage(cookiesPolicy.usage);
+      this.setCampaigns(cookiesPolicy.campaigns);
+    }
+  }
+
+  static setEssential = (value) => this.essential = value;
+  static setSettings = (value) => this.settings = value;
+  static setUsage = (value) => this.usage = value;
+  static setCampaigns = (value) => this.campaigns = value;
+
+  static save = (expires = 365) => {
+    setCookie('cookies_preferences_set', true, expires)
+    setCookie('cookies_policy', JSON.stringify({ 
+      essential: this.essential, 
+      settings: this.settings, 
+      usage: this.usage, 
+      campaigns: this.campaigns 
+    }), expires)
+    hideCookieBanner()
+    setTrackingCookies()
+  }
+}
+
 if (getCookie('cookies_preferences_set')) {
   hideCookieBanner()
 }
