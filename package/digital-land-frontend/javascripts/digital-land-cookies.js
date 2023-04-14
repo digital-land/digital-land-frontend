@@ -29,12 +29,16 @@ function acceptCookies (cookiePrefs = { essential: true, settings: true, usage: 
 
 function hideCookieBanner () {
   var cookieBanner = document.getElementById('cookie-banner')
-  cookieBanner.style.display = 'none'
+  if(cookieBanner){
+    cookieBanner.style.display = 'none'
+  }
 }
 
 function showCookieConfirmation () {
   var cookieBanner = document.getElementById('cookie-confirmation')
-  cookieBanner.style.display = 'block'
+  if(cookieBanner){
+    cookieBanner.style.display = 'block'
+  }
 }
 
 function setTrackingCookies () {
