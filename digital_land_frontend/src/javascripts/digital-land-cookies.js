@@ -19,9 +19,9 @@ function getCookie (name) {
   return null
 }
 
-function acceptCookies () { // eslint-disable-line no-unused-vars
+function acceptCookies (cookiePrefs = { essential: true, settings: true, usage: true, campaigns: true }) { // eslint-disable-line no-unused-vars
   setCookie('cookies_preferences_set', true, 365)
-  setCookie('cookies_policy', JSON.stringify({ essential: true, settings: true, usage: true, campaigns: true }), 365)
+  setCookie('cookies_policy', JSON.stringify(cookiePrefs), 365)
   hideCookieBanner()
   showCookieConfirmation()
   setTrackingCookies()
