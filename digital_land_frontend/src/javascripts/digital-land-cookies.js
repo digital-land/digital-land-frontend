@@ -50,6 +50,14 @@ function hideCookieBanner () {
   }
 }
 
+function hideCookieConfirmation () {
+  hideCookieBanner ()
+  var cookieBanner = document.getElementById('cookie-confirmation')
+  if(cookieBanner){
+    cookieBanner.style.display = 'none'
+  }
+}
+
 function showCookieConfirmation () {
   var cookieBanner = document.getElementById('cookie-confirmation')
   if(cookieBanner){
