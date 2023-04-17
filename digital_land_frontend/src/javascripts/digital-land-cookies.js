@@ -1,3 +1,19 @@
+const cookieTypes = {
+  cookies_policy: "essential",
+  cookies_preferences_set: "essential",
+  _ga: "usage",
+  _gid: "usage",
+  _gat: "usage",
+};
+
+if(window.gaMeasurementId){
+  cookieTypes[`_ga_${window.gaMeasurementId}`] = 'usage';
+}
+
+function deleteCookie (name) {
+  document.cookie = name + "=;expires=" + new Date + ";domain=" + window.location.hostname + ";path=/";
+}
+
 function setCookie (name, value, days) {
   var expires = ''
   if (days) {
@@ -90,9 +106,28 @@ class cookiePrefs{
       campaigns: this.campaigns 
     }), expires)
     hideCookieBanner()
+    this.invalidateRejectedCookies()
     setTrackingCookies()
   }
+
+  static invalidateRejectedCookies = () => {
+    for (const name in cookieTypes){
+      if(!this.essential && cookieTypes[name] == 'essential'){
+        deleteCookie(name);
+      }
+      if(!this.settings && cookieTypes[name] == 'settings'){
+        deleteCookie(name);
+      }
+      if(!this.usage && cookieTypes[name] == 'usage'){
+        deleteCookie(name);
+      }
+      if(!this.campaigns && cookieTypes[name] == 'campaigns'){
+        deleteCookie(name);
+      }
+    }
+  }
 }
+
 
 if (getCookie('cookies_preferences_set')) {
   hideCookieBanner()
