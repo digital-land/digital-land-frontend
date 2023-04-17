@@ -45,11 +45,18 @@ function setTrackingCookies () {
   var cookiesPolicy = JSON.parse(getCookie('cookies_policy'))
   var doNotTrack = cookiesPolicy == null || !cookiesPolicy.usage
   if (doNotTrack) {
-    window['ga-disable-UA-127566551-1'] = true
+    if(window.gaMeasurementId){
+      window[`ga-disable-${window.gaMeasurementId}`] = true;
+    }
   } else {
-    window.ga = window.ga || function () { (ga.q = ga.q || []).push(arguments) }; ga.l = +new Date()
-    ga('create', 'UA-127566551-1', 'auto')
-    ga('send', 'pageview')
+    if(window.gaMeasurementId){
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', window.gaMeasurementId);
+    } else {
+      console.warn('Google Analytics: No measurement ID specified');
+    }
   }
 }
 
