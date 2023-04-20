@@ -1,5 +1,10 @@
-$govuk-fonts-path: "/static/govuk/assets/fonts/";
-$govuk-images-path: "/static/govuk/assets/images/";
+$dl-frontend-assets-path: "/assets/" !default;
+$dl-frontend-fonts-path: "/static/govuk/assets/fonts/" !default;
+$dl-frontend-images-path: "/static/govuk/assets/images/" !default;
+
+$govuk-assets-path: $dl-frontend-assets-path;
+$govuk-fonts-path: $dl-frontend-fonts-path;
+$govuk-images-path: $dl-frontend-images-path;
 
 // import all GOVUK Frontend scss
 @import "govuk/all";
