@@ -14,6 +14,7 @@ class DevelopmentConfig(Config):
     ENV = "development"
     DEBUG = True
 
+
 class TestConfig(Config):
     ENV = "test"
     DEBUG = True
