@@ -4,7 +4,10 @@
 BRANCH := $(shell git rev-parse --abbrev-ref HEAD)
 
 init::
-	pip install -e .[testing]
+	python -m pip install --upgrade pip
+	python -m pip install pip-tools
+	python -m piptools compile requirements/requirements.in
+	python -m piptools sync requirements/requirements.txt
 	npm install
 
 build:
