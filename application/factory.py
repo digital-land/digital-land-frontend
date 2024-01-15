@@ -57,4 +57,10 @@ def register_templates(app):
 
 
 def register_filters(app):
-    pass
+
+    import application.filters
+
+    for name, function in application.filters.__dict__.items():
+        if callable(function) and not name.startswith("__"):
+            app.add_template_filter(function, name=name)
+
