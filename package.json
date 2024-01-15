@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "frontend components and assets for digital land",
   "engines": {
-    "node": "^16.0.0"
+    "node": "^20.11.0"
   },
   "scripts": {
     "build:javascripts": "rollup --config rollup.config.js",
