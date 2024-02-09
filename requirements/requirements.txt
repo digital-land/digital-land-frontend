@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements/requirements.in
 #
--e file:///Users/adam/repos/digital-land/digital-land-frontend
+-e file:///Users/paulsmith/Sites/digital-land/digital-land-frontend
     # via -r requirements/requirements.in
 blinker==1.7.0
     # via flask

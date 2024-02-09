@@ -1,0 +1,207 @@
+
+html, body {
+  overflow-x:hidden;
+  width:100%;
+}
+
+.dl-data-browser {
+  &__container {
+    overflow-x: auto;
+    border: 1px solid rgb(169, 169, 169);
+    background-image:
+      // Shadows
+      linear-gradient(to right, white, white),
+      linear-gradient(to right, white, white),
+  
+      // Shadow covers
+      linear-gradient(to right, rgba(0,0,0,.25), rgba(255,255,255,0)),
+      linear-gradient(to left, rgba(0,0,0,.25), rgba(255,255,255,0));
+  
+    background-position: left center, right center, left center, right center;
+    background-repeat: no-repeat;
+    background-color: white;
+    background-size: 20px 100%, 20px 100%, 10px 100%, 10px 100%;
+  
+    /* Opera doesn't support this in the shorthand */
+    background-attachment: local, local, scroll, scroll;
+  
+    scrollbar-width: thin;
+    scrollbar-color: #8A8A8A #DFE9EB;
+  
+    /* Chrome, Edge and Safari */
+    &::-webkit-scrollbar {
+      height: 10px;
+      width: 10px;
+    }
+    &::-webkit-scrollbar-track {
+      border-radius: 5px;
+      background-color: #e8e8e8;
+    }
+  
+    &::-webkit-scrollbar-track:hover {
+      background-color: #B8C0C2;
+    }
+  
+    &::-webkit-scrollbar-track:active {
+      background-color: #B8C0C2;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      border-radius: 0px;
+      background-color: $govuk-border-colour;
+    }
+  
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #5F5F5F;
+    }
+  
+    &::-webkit-scrollbar-thumb:active {
+      background-color: #474D54;
+    }
+  }
+  &__table {
+
+  }
+}
+
+.app-data-table {
+  border-collapse: collapse;
+  border-style: solid;
+  border: 1px solid govuk-colour('light-grey');
+  &__header {
+    background-color: govuk-colour('light-grey');
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    vertical-align: middle;
+    text-align: left;
+  }
+  thead {
+    tr:first-child {
+      td, th {
+        &.app-data-table__header--ui {
+          background: none;
+        }
+        &:not(.app-data-table__header--ui) {
+          border-top-width: 2px;
+          // min-width: 20ch;
+        }
+      }
+    }
+  }
+  tbody {
+    tr {
+      &:hover {
+        background: rgba(govuk-colour("light-grey"),0.3);
+      }
+    }
+    tr:first-child {
+      td, th {
+        border-top-width: 2px;
+        &:not(.app-data-table__cell--ui) {
+        }
+      }
+    }
+    tr:last-child {
+      td, th {
+        border-bottom-width: 2px;
+        &:not(.app-data-table__cell--ui) {
+        }
+      }
+    }
+  }
+  &__header, &__cell {
+    border: 1px solid $govuk-border-colour;
+    @include govuk-responsive-padding(3);
+    &:first-child {
+      border-left-width: 2px;
+    }
+    &:last-child {
+      border-left-width: 2px;
+    }
+  }
+  &__header,
+  &__cell--ui {
+    white-space: nowrap;
+    vertical-align: top;
+  }
+  &__cell {
+    vertical-align: top;
+    font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro","Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+    &--ui {
+      padding-top: 0;
+      padding-bottom: 0;
+      @include govuk-responsive-padding(4, 'left');
+      @include govuk-responsive-padding(4, 'right');
+    }
+  }
+}
+
+.app-table {
+  background-color: transparent;
+  border-collapse: collapse;
+  width: 100%;
+  th, td {
+    @include govuk-font(19)
+  }
+  th {
+    @include govuk-font(19, bold, true);
+  }
+  tbody {
+    td, th {
+      @include govuk-responsive-padding(2, 'top');
+      @include govuk-responsive-padding(2, 'bottom');
+    }
+  }
+}
+
+@include govuk-media-query($until: tablet) {
+  .app-table--responsive {
+    thead {
+      clip: rect(0 0 0 0);
+      -webkit-clip-path: inset(50%);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      width: 1px;
+      white-space: nowrap;
+    }
+    tr {
+      display: block;
+      border: 1px solid $govuk-border-colour;
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+    td {
+      -webkit-column-gap: 3.16vw;
+      -moz-column-gap: 3.16vw;
+      column-gap: 3.16vw;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+    }
+
+    tbody {
+      td {
+        &:before {
+          content: attr(data-label);
+          float: left;
+          font-weight: 700;
+        }
+      }
+      th {
+        display: block;
+        border-top: 0;
+      }
+      th,
+      td,
+      td:last-child {
+            @include govuk-responsive-padding(2, 'top');
+            @include govuk-responsive-padding(2, 'bottom');
+            @include govuk-responsive-padding(4, 'left');
+            @include govuk-responsive-padding(4, 'right');
+            text-align: left;
+        }
+    }
+  }
+}
