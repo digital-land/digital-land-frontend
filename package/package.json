@@ -1,7 +1,7 @@
 {
   "name": "digital-land-frontend",
   "description": "DL Frontend",
-  "version": "0.2.1",
+  "version": "0.2.11",
   "engines": {
     "node": ">= 4.2.0"
   },
