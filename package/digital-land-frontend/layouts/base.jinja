@@ -49,7 +49,10 @@
 
 {% block footer %}
 	{% block footerStart %}{% endblock footerStart %}
-	{% include 'digital-land-frontend/partials/footer.jinja' %}
+  {%- block footerContent %}
+	  {%- include 'digital-land-frontend/partials/footer.jinja' %}
+  {% endblock footerContent -%}
+  {% block footerEnd %}{% endblock footerEnd %}
 {% endblock %}
 
 {% block bodyEnd %}
