@@ -83,6 +83,13 @@ Components within this respository deemed a solution to a common problem and of 
 
 - A partial is a shared piece of jinja which is the same across any digital land application. If the content or structure of the partial needs differ depending on it's context then it should be abstracted as a reusable component.
 
+## Bumping the version
+
+When you make changes to the frontend package you will need to bump the version. You should do this in 2 places:
+
+* `package/package.json` - this bumps the node package, installed with npm
+* `setup.py` - this bumps the python package, installed with pip
+
 ## Using digital-land-frontend in your projects
 
 You need to install the python and npm packages.
