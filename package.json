@@ -1,13 +1,13 @@
 {
   "name": "digital-land-frontend-repo",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "frontend components and assets for digital land",
   "engines": {
     "node": ">=16.0.0"
   },
   "scripts": {
     "build:javascripts": "rollup --config rollup.config.js",
-    "build:stylesheets": "node-sass digital_land_frontend/src/scss -o assets/stylesheets --include-path node_modules/govuk-frontend --include-path digital_land_frontend/templates",
+    "build:stylesheets": "sass digital_land_frontend/src/scss:assets/stylesheets --load-path=node_modules/govuk-frontend --load-path=digital_land_frontend/templates",
     "clean:package": "rm -rf package/digital-land-frontend",
     "copy:images": "copyfiles 'digital_land_frontend/src/images/**/*.{png,ico}' package/digital-land-frontend/images --up 3",
     "copy:scss": "copyfiles 'digital_land_frontend/src/scss/**/*.scss' package/digital-land-frontend/ --up 3 && copyfiles 'digital_land_frontend/templates/components/**/*.scss' package/digital-land-frontend/ --up 2",
