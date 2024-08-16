@@ -6,3 +6,27 @@
 .dl-small-text {
   @include govuk-font($size: 16);
 }
+
+// styles for code blocks
+
+.dl-code-block {
+  background: #f4f4f4;
+  color: #333;
+  page-break-inside: avoid;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 1.3;
+  margin:0;
+  max-width: 100%;
+  overflow-y: scroll;
+  padding: govuk-spacing(3);
+  display: block;
+  word-wrap: break-word;
+  max-height: calc(1em * 12);
+  font-size: 1rem;
+}
+
+.dl-code-block--inline {
+  display: inline-block;
+  padding: govuk-spacing(1) govuk-spacing(2);
+  vertical-align: middle;
+}
