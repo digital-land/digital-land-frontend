@@ -47,6 +47,9 @@ ListFilter.prototype.ListFilter = function (e) {
   const listsToFilter = convertNodeListToArray(document.querySelectorAll('[data-filter="list"]'))
   const searchTerm = e.target.value
 
+  // set a class if a search/filter is in progress
+  this.setActiveClasses(listsToFilter, searchTerm)
+
   const boundMatchSearchTerm = this.matchSearchTerm.bind(this)
   itemsToFilter
     .filter(function ($item) {
@@ -80,6 +83,16 @@ ListFilter.prototype.matchSearchTerm = function (item, term) {
     return false
   }
   return true
+}
+
+ListFilter.prototype.setActiveClasses = function(lists, searchTerm) {
+  lists.forEach(list => {
+    if (searchTerm !== '') {
+      list.classList.add(this.list_filtered_class);
+    } else {
+      list.classList.remove(this.list_filtered_class);
+    }
+  })
 }
 
 ListFilter.prototype.updateListCounts = function (lists) {
@@ -123,6 +136,7 @@ ListFilter.prototype.setupOptions = function (params) {
   params = params || {}
   this.list_section_selector = params.list_section_selector || '.dl-list-filter__count'
   this.count_wrapper_selector = params.count_wrapper_selector || '.dl-list-filter__count__wrapper'
+  this.list_filtered_class = params.list_filtered_class || 'dl-list-filter__filtered-listed'
 }
 
 export default ListFilter
