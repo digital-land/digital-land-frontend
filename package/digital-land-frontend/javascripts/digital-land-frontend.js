@@ -750,7 +750,7 @@
     params = params || {};
     this.list_section_selector = params.list_section_selector || '.dl-list-filter__count';
     this.count_wrapper_selector = params.count_wrapper_selector || '.dl-list-filter__count__wrapper';
-    this.list_filtered_class = params.list_filtered_class || '.dl-list-filter__filtered-listed';
+    this.list_filtered_class = params.list_filtered_class || 'dl-list-filter__filtered-listed';
   };
 
   (function (global, factory) {
