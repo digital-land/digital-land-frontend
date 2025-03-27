@@ -14,7 +14,7 @@ for directory in directories_jinja:
 
 setup(
     name="digital-land-frontend",
-    version="1.0.0",
+    version="0.2.11",
     author="Digital land",
     description="Reusable frontend code for digital land services and products",
     license="MIT",
