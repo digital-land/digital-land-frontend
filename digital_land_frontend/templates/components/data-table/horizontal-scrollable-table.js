@@ -1,5 +1,3 @@
-import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind'
-
 function HorizontalScrollableTable ($module) {
   this.$module = $module
 }

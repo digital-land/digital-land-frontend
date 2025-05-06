@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build:javascripts": "rollup --config rollup.config.js",
-    "build:stylesheets": "sass digital_land_frontend/src/scss:assets/stylesheets --load-path=node_modules/govuk-frontend --load-path=digital_land_frontend/templates",
+    "build:stylesheets": "sass digital_land_frontend/src/scss:assets/stylesheets --load-path=node_modules/govuk-frontend/dist --load-path=digital_land_frontend/templates",
     "clean:package": "rm -rf package/digital-land-frontend",
     "copy:images": "copyfiles 'digital_land_frontend/src/images/**/*.{png,ico}' package/digital-land-frontend/images --up 3",
     "copy:scss": "copyfiles 'digital_land_frontend/src/scss/**/*.scss' package/digital-land-frontend/ --up 3 && copyfiles 'digital_land_frontend/templates/components/**/*.scss' package/digital-land-frontend/ --up 2",
@@ -35,7 +35,7 @@
   "homepage": "https://github.com/digital-land/digital-land-frontend#readme",
   "devDependencies": {
     "copyfiles": "latest",
-    "govuk-frontend": "4.2.0",
+    "govuk-frontend": "5.9.0",
     "npm": "^8.3.0",
     "npm-run-all": "^4.1.5",
     "rollup": "^2.60.0",

@@ -9,7 +9,7 @@ module.exports = [
     context: "window",
   },
   {
-    input: "node_modules/govuk-frontend/govuk/all.js",
+    input: "node_modules/govuk-frontend/dist/govuk/all.bundle.js",
     output: {
       file: "package/digital-land-frontend/javascripts/govuk/govuk-frontend.js",
     },
