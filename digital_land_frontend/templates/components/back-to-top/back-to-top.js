@@ -1,5 +1,3 @@
-import "../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind";
-
 // Back to top module as seen in govuk-design-system
 // https://github.com/alphagov/govuk-design-system/blob/master/src/javascripts/components/back-to-top.js
 function BackToTop($module) {

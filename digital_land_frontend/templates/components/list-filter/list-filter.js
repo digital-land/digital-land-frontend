@@ -1,5 +1,3 @@
-import '../../../../node_modules/govuk-frontend/govuk/vendor/polyfills/Function/prototype/bind'
-
 function convertNodeListToArray (nl) {
   return Array.prototype.slice.call(nl)
 }
