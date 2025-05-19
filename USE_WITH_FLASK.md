@@ -8,18 +8,15 @@ Add the python package to your `requirements.txt` file.
 -e git+https://github.com/digital-land/digital-land-frontend.git#egg=digital-land-frontend
 ```
 
-And add the node package to your `package.json` file.
-
+Then install the npm package by running
 ```
-"dependencies": {
-  "digital-land-frontend": "https://gitpkg.now.sh/digital-land/digital-land-frontend/package?main"
-}
+npm install @planning-data/digital-land-frontend
 ```
 
 Also add an `nps` script to `package.json`.
 ```
 "scripts": {
-  "nps": "nps -c ./node_modules/digital-land-frontend/package-scripts.js"
+  "nps": "nps -c ./node_modules/@planning-data/digital-land-frontend/package-scripts.js"
 }
 ```
 
@@ -66,7 +63,7 @@ You will also need to set the `assetPath` global variable. In `factory.py` add t
 ```
 def base_context_processor():
   return {"assetPath": "/static"}
-``` 
+```
 
 ### Custom scss
 
@@ -134,7 +131,7 @@ To setup up watch you will need to set the watch paths in `digital-land-frontend
 ```
 {
   "watchPaths": "'./assets/scss/**/*.scss' './assets/javascripts/**/*.js'"
-  ... 
+  ...
 }
 ```
 
