@@ -25,14 +25,26 @@ jobs:
       - name: Check version change
         id: version-check
         run: |
-          # Get the base branch version (before merge)
-          BASE_VERSION=$(git show origin/main:package/package.json | grep '"version"' | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[:space:]')
+          # Get the latest release version using gh
+          LATEST_RELEASE=$(gh release list --limit 1 --json tagName --jq '.[0].tagName')
+          if [ -z "$LATEST_RELEASE" ]; then
+            echo "No previous release found, will publish"
+            echo "should_publish=true" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+
+          # Remove the 'v' prefix from the release tag
+          LATEST_VERSION=${LATEST_RELEASE#v}
           CURRENT_VERSION=$(cat package/package.json | grep '"version"' | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[:space:]')
-          if [ "$BASE_VERSION" = "$CURRENT_VERSION" ]; then
-            echo "Version unchanged, skipping publish. BASE_VERSION: $BASE_VERSION, CURRENT_VERSION: $CURRENT_VERSION"
+
+          echo "Latest release version: $LATEST_VERSION"
+          echo "Current version: $CURRENT_VERSION"
+
+          if [ "$LATEST_VERSION" = "$CURRENT_VERSION" ]; then
+            echo "Version unchanged from last release, skipping publish"
             echo "should_publish=false" >> $GITHUB_OUTPUT
           else
-            echo "Version changed from $BASE_VERSION to $CURRENT_VERSION"
+            echo "Version changed from $LATEST_VERSION to $CURRENT_VERSION"
             echo "should_publish=true" >> $GITHUB_OUTPUT
           fi
 
