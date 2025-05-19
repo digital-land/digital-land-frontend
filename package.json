@@ -1,6 +1,6 @@
 {
   "name": "digital-land-frontend-repo",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "frontend components and assets for digital land",
   "engines": {
     "node": ">=16.0.0"
