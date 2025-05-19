@@ -49,3 +49,10 @@ jobs:
         run: cd package && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create release
+        if: steps.version-check.outputs.should_publish == 'true'
+        run: |
+          gh release create v$CURRENT_VERSION --generate-notes --latest
+          gh release list
+          gh release view v$CURRENT_VERSION
