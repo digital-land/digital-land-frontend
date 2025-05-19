@@ -20,6 +20,7 @@ jobs:
         with:
           node-version: "20"
           registry-url: "https://registry.npmjs.org"
+          scope: "@planning-data"
 
       - name: Check version change
         id: version-check

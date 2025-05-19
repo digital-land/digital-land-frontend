@@ -1,5 +1,5 @@
 {
-  "digitalLandFrontendPath": "node_modules/digital-land-frontend/",
+  "digitalLandFrontendPath": "node_modules/@planning-data/digital-land-frontend/",
   "govukFrontendPath": "node_modules/govuk-frontend/dist/",
   "scssPath": "./src/scss",
   "templatesPath": "'application/templates'",

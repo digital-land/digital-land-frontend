@@ -155,14 +155,14 @@ This gives you access to all the templates and jinja filters.
 
 Then install the npm package by running
 ```
-npm install https://github.com/digital-land/digital-land-frontend/tree/main/package
+npm install @planning-data/digital-land-frontend
 ```
 This gives you access to the scss, the compiled js and the npm build scripts you can use in your projects.
 
 
 Once installed add the following line to `package.json` `scripts`
 ```
-"nps": "nps -c ./node_modules/digital-land-frontend/package-scripts.js"
+"nps": "nps -c ./node_modules/@planning-data/digital-land-frontend/package-scripts.js"
 ```
 
 In your project you can now build the stylesheets by running:
