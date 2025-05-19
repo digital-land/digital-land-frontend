@@ -109,6 +109,40 @@ To publish a new version:
 
 Note: Make sure you have the necessary permissions and NPM token configured in the repository secrets.
 
+### Versioning Strategy
+
+We follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH) for both the npm and Python packages. Here's our versioning strategy:
+
+#### Patch Version (x.y.z → x.y.z+1)
+- Bug fixes that don't change existing functionality
+- Minor CSS adjustments that don't affect layout
+- Documentation updates
+- Performance improvements
+- Security patches
+
+#### Minor Version (x.y.z → x.y+1.0)
+- New features that don't break existing functionality
+- New components that are backward compatible
+- Enhancement of existing components
+- New utility functions or helpers
+- Deprecation notices (but not removal)
+
+#### Major Version (x.y.z → x+1.0.0)
+- Breaking changes to existing components
+- Removal of deprecated features
+- Major structural changes to the codebase
+- Changes that require updates to consuming applications
+- Significant changes to the build process
+
+#### Version Bump Process
+1. Determine the type of change (patch/minor/major)
+2. Update version in both `package/package.json` and `setup.py`
+3. Update [CHANGELOG.md](/CHANGELOG.md) with detailed changes
+4. Create a pull request with the version bump
+5. After merging, the GitHub Action will automatically publish to NPM
+
+Remember to always update the [CHANGELOG.md](/CHANGELOG.md) file when bumping versions to document the changes made.
+
 ## Using digital-land-frontend in your projects
 
 You need to install the python and npm packages.
