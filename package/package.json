@@ -1,7 +1,7 @@
 {
   "name": "@planning-data/digital-land-frontend",
   "description": "Digital Land Frontend components and assets",
-  "version": "0.4.7",
+  "version": "0.4.8",
   "engines": {
     "node": ">= 4.2.0"
   },
