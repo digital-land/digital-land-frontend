@@ -21,8 +21,8 @@ scripts.build = {
 }
 
 scripts.copy = {
-  javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.{js,json}" ${configPaths.jsOutputPath} -u 4`,
-  images: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/images/**/*.{png,ico}" ${configPaths.imagesOutputPath} -u 4`,
+  javascripts: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/javascripts/**/*.{js,json}" ${configPaths.jsOutputPath} -u 5`,
+  images: `npx copyfiles "${configPaths.digitalLandFrontendPath}digital-land-frontend/images/**/*.{png,ico}" ${configPaths.imagesOutputPath} -u 5`,
   govukAssets: `npx copyfiles -u 2 "${configPaths.govukFrontendPath}govuk/assets/**" ${configPaths.govukOutputPath}`
 }
 
