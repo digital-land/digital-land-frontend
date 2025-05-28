@@ -432,7 +432,7 @@
     // hide all
     this.checkboxArr.forEach((ckbx) => setCheckboxDisplay(ckbx, 'none'));
     // re show those in filtered array
-    ckbxArr.forEach((ckbx) => setCheckboxDisplay(ckbx, 'block'));
+    ckbxArr.forEach((ckbx) => setCheckboxDisplay(ckbx, 'flex'));
 
     if (cb) {
       cb();
