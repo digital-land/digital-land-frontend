@@ -1,5 +1,5 @@
 {% macro dlFilterCheckboxes(params) %}
-<div class="govuk-checkboxes" data-module="filter-checkboxes">
+<div class="govuk-checkboxes {{ params.classes }}" data-module="filter-checkboxes">
   <div class="dl-filter-group__auto-filter">
     <label for="input-{{ params.uniqueID }}" class="govuk-label govuk-visually-hidden">
     Filter Show only
