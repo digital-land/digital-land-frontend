@@ -1,7 +1,7 @@
 {
   "name": "@planning-data/digital-land-frontend",
   "description": "Digital Land Frontend components and assets",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "engines": {
     "node": ">= 4.2.0"
   },
@@ -24,7 +24,7 @@
     "browser-sync": "^2.27.7",
     "chokidar-cli": "^3.0.0",
     "copyfiles": "latest",
-    "govuk-frontend": "5.10.0",
+    "govuk-frontend": "5.11.1",
     "nps": "^5.10.0",
     "rollup": "^2.60.0",
     "sass": "^1.77.6",
