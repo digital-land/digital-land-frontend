@@ -1,24 +1,63 @@
 # Digital Land Frontend
 
-## Requirements
+This repository produces two packages from the same source:
 
-- Node V16+
-- Python 3.5
-- PIP
+* a **Python package** (`digital-land-frontend`) containing the Jinja templates, components and filters
+* an **npm package** (`@planning-data/digital-land-frontend`) containing the Sass, compiled JavaScript, images and build scripts
 
-## Getting started
+Apps need both. See [Using digital-land-frontend in your projects](#using-digital-land-frontend-in-your-projects).
 
-This documentation assumes you have installed [Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python) and [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/). We recommend using 'Node Version Manager' (NVM) because this repository has a [.nvmrc](.nvmrc) file which will ensure you are using the correct version of NodeJS.
+## Development
 
-1. Clone this repository:
-```
-git clone git@github.com:digital-land/digital-land-frontend.git
-```
-2. In terminal, switch to the root directory of the cloned repository.
-3. Make sure you are using the correct Node version. Users of RVM can type `rvm use`
-2. Run `npm install` to install all the node packages
+### Requirements
+
+- [Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python) 3.10+
+- [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/) 16+ (the CI checks use Node 24)
+
+We recommend using Node Version Manager (nvm). This repository has a [.nvmrc](.nvmrc) file, so running `nvm use` switches to the right version of Node.
+
+### Setting up
+
+1. Clone this repository and move into it:
+   ```
+   git clone git@github.com:digital-land/digital-land-frontend.git
+   cd digital-land-frontend
+   ```
+2. Create and activate a virtual environment:
+   ```
+   python -m venv .venv
+   source .venv/bin/activate
+   ```
+3. Install the Python package in editable mode with its test dependencies:
+   ```
+   pip install -e ".[testing]"
+   ```
+4. Install the node packages:
+   ```
+   npm install
+   ```
 
 We use a `.editorconfig` file to ensure code consistency. There are [plugins for the popular editors](https://editorconfig.org/#download).
+
+### Running the tests
+
+```
+python -m pytest tests/unit
+```
+
+### Building the packages
+
+* Python: `pip install build` then `python -m build`. The built package is written to `dist/`.
+* npm: `make package` (or `npm run build:package`). The package is written to `package/digital-land-frontend/`. Run `npm pack --dry-run` in `package/` to see exactly what would be published.
+
+### Checks on pull requests
+
+The [test workflow](.github/workflows/test.yml) runs on every pull request. It can also be run by hand from the Actions tab. It:
+
+* runs the Python unit tests
+* builds the Python package and checks the built package can load all of its templates
+* builds the npm package and lists its contents
+* checks the pull request title follows the [pull request title rules](#pull-request-titles). This check only runs for pull requests.
 
 ## Templates
 
@@ -83,33 +122,63 @@ Components within this respository deemed a solution to a common problem and of 
 
 - A partial is a shared piece of jinja which is the same across any digital land application. If the content or structure of the partial needs differ depending on it's context then it should be abstracted as a reusable component.
 
-## Bumping the version
+## Publishing
 
-When you make changes to the frontend package you will need to bump the version. You should do this in 2 places:
+### Pull request titles
 
-* `package/package.json` - this bumps the node package, installed with npm
-* `setup.py` - this bumps the python package, installed with pip
+Pull requests are squash merged, so the PR title becomes the commit message on `main`. PR titles must follow [Conventional Commits](https://www.conventionalcommits.org/). The [test workflow](.github/workflows/test.yml) checks this, and the check re-runs when you edit the title.
 
-### Publishing to NPM
+The format is:
 
-The package is automatically published to NPM when changes are pushed to the `main` branch that modify the `package/package.json` file. The publishing process is handled by a GitHub Actions workflow that:
+```
+<type>(<optional scope>): <description>
+```
 
-1. Triggers on pushes to the `main` branch that affect `package/package.json`
-2. Checks if the version number has changed in `package/package.json`
-3. If the version has changed:
-   - Installs dependencies
-   - Runs the `make publish` command
-   - Publishes the package to NPM using the configured NPM token
+| Type | Use it for |
+|---|---|
+| `feat` | a new component, feature or option |
+| `fix` | a bug fix |
+| `perf` | a performance improvement |
+| `docs` | documentation only |
+| `refactor` | code changes that don't change behaviour |
+| `style` | formatting only |
+| `test` | adding or changing tests |
+| `build` | the build process, packaging or dependencies |
+| `ci` | GitHub Actions workflows |
+| `chore` | anything else that doesn't affect the packages |
+| `revert` | reverting an earlier change |
+
+The scope is optional. Use it to say what the change affects, for example the component name or `python` or `npm`.
+
+If the change will break apps that use the packages, add `!` after the type or scope. Explain what apps need to change in the PR description.
+
+Examples:
+
+* `feat(map): add a layer toggle control`
+* `fix(filter-checkboxes): correct the display type for checkbox filtering`
+* `build: upgrade govuk-frontend to 5.11.1`
+* `feat(data-table)!: rename the dlDataTable params`
+
+These titles will later be used to generate the changelog and work out version numbers automatically. Until then, follow the process below.
+
+### Publishing a new version
+
+The npm package is published automatically by the [publish package workflow](.github/workflows/publish-package.yml) when the version in `package/package.json` changes on `main`. The workflow:
+
+1. checks whether the version in `package/package.json` is different from the latest GitHub release
+2. if it is, builds the package with `make package` and publishes it to npm using the `NPM_TOKEN` repository secret
+3. creates a GitHub release for the new version
+
+The Python package is not published. Apps install it from this repository's `main` branch.
 
 To publish a new version:
 
-1. Update the version number in `package/package.json`
-2. Commit and push the changes to the `main` branch
-3. The GitHub Action will automatically handle the publishing process
+1. Decide the new version number using the [versioning strategy](#versioning-strategy).
+2. Update the version in both `package/package.json` and `setup.py`.
+3. Add the changes to [CHANGELOG.md](/CHANGELOG.md).
+4. Open a pull request with these changes. Once it's merged, the npm package is published.
 
-Note: Make sure you have the necessary permissions and NPM token configured in the repository secrets.
-
-### Versioning Strategy
+### Versioning strategy
 
 We follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH) for both the npm and Python packages. Here's our versioning strategy:
 
@@ -133,13 +202,6 @@ We follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH) for bot
 - Major structural changes to the codebase
 - Changes that require updates to consuming applications
 - Significant changes to the build process
-
-#### Version Bump Process
-1. Determine the type of change (patch/minor/major)
-2. Update version in both `package/package.json` and `setup.py`
-3. Update [CHANGELOG.md](/CHANGELOG.md) with detailed changes
-4. Create a pull request with the version bump
-5. After merging, the GitHub Action will automatically publish to NPM
 
 Remember to always update the [CHANGELOG.md](/CHANGELOG.md) file when bumping versions to document the changes made.
 
