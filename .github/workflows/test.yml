@@ -1,0 +1,87 @@
+name: Test
+run-name: Test - ${{ github.head_ref || github.ref_name }} by @${{ github.actor }}
+
+on:
+  pull_request:
+    # "edited" re-runs the checks when a PR title is changed
+    types: [opened, edited, synchronize, reopened]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: test-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python tests and package build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # full history and tags
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install package and test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[testing]" build
+
+      - name: Run unit tests
+        run: python -m pytest -v tests/unit
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check the built package can load its templates
+        run: |
+          python -m venv /tmp/wheel-check
+          /tmp/wheel-check/bin/pip install dist/*.whl
+          # run from outside the repo so the installed package is used, not the checkout
+          cd /tmp
+          /tmp/wheel-check/bin/python - <<'EOF'
+          from jinja2 import Environment, PackageLoader
+
+          env = Environment(loader=PackageLoader("digital_land_frontend"))
+          templates = env.list_templates(extensions=["jinja"])
+          assert "layouts/base.jinja" in templates, templates
+          for name in templates:
+              env.get_template(name)
+          print(f"Loaded {len(templates)} templates from the built wheel")
+          EOF
+
+  npm:
+    name: npm package build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "24"
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build package
+        run: npm run build:package
+
+      - name: List package contents
+        working-directory: package
+        run: npm pack --dry-run
+
+  pr-title:
+    name: PR title follows Conventional Commits
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
