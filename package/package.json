@@ -20,6 +20,11 @@
     "template"
   ],
   "license": "MIT",
+  "files": [
+    "digital-land-frontend",
+    "package-scripts.js",
+    "default.paths.json"
+  ],
   "dependencies": {
     "browser-sync": "^2.27.7",
     "chokidar-cli": "^3.0.0",

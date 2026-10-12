@@ -48,7 +48,7 @@ python -m pytest tests/unit
 ### Building the packages
 
 * Python: `pip install build` then `python -m build`. The built package is written to `dist/`. The package is configured in [pyproject.toml](pyproject.toml). Its version comes from the latest git tag (for example `v0.7.0`), worked out by [setuptools-scm](https://setuptools-scm.readthedocs.io/). Builds from commits after a tag get a development version such as `0.7.1.dev3+g1a2b3c4`.
-* npm: `make package` (or `npm run build:package`). The package is written to `package/digital-land-frontend/`. Run `npm pack --dry-run` in `package/` to see exactly what would be published.
+* npm: `make package` (or `npm run build:package`). The package is written to `package/digital-land-frontend/`. This folder is generated, so it is not committed. The publish workflow builds it fresh before publishing. The files that get published are listed in `files` in [package/package.json](package/package.json). Run `npm pack --dry-run` in `package/` to see exactly what would be published.
 
 ### Checks on pull requests
 
