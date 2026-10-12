@@ -47,7 +47,7 @@ python -m pytest tests/unit
 
 ### Building the packages
 
-* Python: `pip install build` then `python -m build`. The built package is written to `dist/`.
+* Python: `pip install build` then `python -m build`. The built package is written to `dist/`. The package is configured in [pyproject.toml](pyproject.toml). Its version comes from the latest git tag (for example `v0.7.0`), worked out by [setuptools-scm](https://setuptools-scm.readthedocs.io/). Builds from commits after a tag get a development version such as `0.7.1.dev3+g1a2b3c4`.
 * npm: `make package` (or `npm run build:package`). The package is written to `package/digital-land-frontend/`. Run `npm pack --dry-run` in `package/` to see exactly what would be published.
 
 ### Checks on pull requests
@@ -167,14 +167,14 @@ The npm package is published automatically by the [publish package workflow](.gi
 
 1. checks whether the version in `package/package.json` is different from the latest GitHub release
 2. if it is, builds the package with `make package` and publishes it to npm using the `NPM_TOKEN` repository secret
-3. creates a GitHub release for the new version
+3. creates a GitHub release for the new version, which also creates a `vX.Y.Z` git tag
 
-The Python package is not published. Apps install it from this repository's `main` branch.
+The Python package is not published. Apps install it from this repository's `main` branch. Its version comes from the git tag that the workflow creates, so you don't need to change it by hand.
 
 To publish a new version:
 
 1. Decide the new version number using the [versioning strategy](#versioning-strategy).
-2. Update the version in both `package/package.json` and `setup.py`.
+2. Update the version in `package/package.json`.
 3. Add the changes to [CHANGELOG.md](/CHANGELOG.md).
 4. Open a pull request with these changes. Once it's merged, the npm package is published.
 
