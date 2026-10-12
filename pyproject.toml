@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=77", "setuptools-scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "digital-land-frontend"
+# the version is worked out from git tags by setuptools-scm
+dynamic = ["version"]
+description = "Reusable frontend code for digital land services and products"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [
+    { name = "MHCLG Planning Data Team", email = "DigitalLand@communities.gov.uk" },
+]
+license = "MIT"
+license-files = ["LICENSE"]
+
+dependencies = [
+    "govuk-frontend-jinja",
+    "validators",
+]
+
+[project.optional-dependencies]
+testing = [
+    "pytest",
+    "flake8",
+]
+
+[project.urls]
+Homepage = "https://github.com/digital-land/digital-land-frontend"
+Changelog = "https://github.com/digital-land/digital-land-frontend/blob/main/CHANGELOG.md"
+Issues = "https://github.com/digital-land/digital-land-frontend/issues"
+
+[tool.setuptools]
+packages = ["digital_land_frontend"]
+# only ship the templates directory as package data, not the Sass/JS sources in src/
+include-package-data = false
+
+[tool.setuptools.package-data]
+digital_land_frontend = ["templates/**/*"]
+
+[tool.setuptools_scm]
+# used when there is no git history, for example installing from a GitHub zip archive
+fallback_version = "0.0.0"
