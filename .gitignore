@@ -14,4 +14,7 @@ __pycache__/
 build/
 dist/
 
+# built by `make package`, published to npm but not committed
+package/digital-land-frontend/
+
 .idea
