@@ -2,23 +2,25 @@
 
 ### Install
 
-Add the python package to your `requirements.txt` file.
+Add the Python package from PyPI to your requirements file. Use the same version for the Python and npm packages.
 
 ```
--e git+https://github.com/digital-land/digital-land-frontend.git#egg=digital-land-frontend
+digital-land-frontend==0.8.0
 ```
 
 Then install the npm package by running
 ```
-npm install @planning-data/digital-land-frontend
+npm install @digital-land-gov-uk/digital-land-frontend@0.8.0
 ```
 
 Also add an `nps` script to `package.json`.
 ```
 "scripts": {
-  "nps": "nps -c ./node_modules/@planning-data/digital-land-frontend/package-scripts.js"
+  "nps": "nps -c ./node_modules/@digital-land-gov-uk/digital-land-frontend/package-scripts.js"
 }
 ```
+
+If you're moving from the git install or the `@planning-data` npm package, see [Migrating from versions before 0.8.0](README.md#migrating-from-versions-before-080).
 
 Create a config file called `digital-land-frontend.config.json`. Use this file to override the default paths the common npm scripts use.
 

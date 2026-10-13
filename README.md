@@ -3,9 +3,9 @@
 This repository produces two packages from the same source:
 
 * a **Python package** (`digital-land-frontend`) containing the Jinja templates, components and filters
-* an **npm package** (`@planning-data/digital-land-frontend`) containing the Sass, compiled JavaScript, images and build scripts
+* an **npm package** (`@digital-land-gov-uk/digital-land-frontend`) containing the Sass, compiled JavaScript, images and build scripts
 
-Apps need both. See [Using digital-land-frontend in your projects](#using-digital-land-frontend-in-your-projects).
+Apps need both, at the same version. See [Using digital-land-frontend in your projects](#using-digital-land-frontend-in-your-projects).
 
 ## Development
 
@@ -134,97 +134,136 @@ The format is:
 <type>(<optional scope>): <description>
 ```
 
-| Type | Use it for |
-|---|---|
-| `feat` | a new component, feature or option |
-| `fix` | a bug fix |
-| `perf` | a performance improvement |
-| `docs` | documentation only |
-| `refactor` | code changes that don't change behaviour |
-| `style` | formatting only |
-| `test` | adding or changing tests |
-| `build` | the build process, packaging or dependencies |
-| `ci` | GitHub Actions workflows |
-| `chore` | anything else that doesn't affect the packages |
-| `revert` | reverting an earlier change |
+| Type | Use it for | Released? |
+|---|---|---|
+| `feat` | a new component, feature or option, or a change apps will notice, such as upgrading GOV.UK Frontend | yes |
+| `fix` | a bug fix | yes |
+| `perf` | a performance improvement | yes |
+| `revert` | reverting an earlier change | yes |
+| `docs` | documentation only | no |
+| `refactor` | code changes that don't change behaviour | no |
+| `style` | formatting only | no |
+| `test` | adding or changing tests | no |
+| `build` | this repo's build tooling, when apps won't notice | no |
+| `ci` | GitHub Actions workflows | no |
+| `chore` | anything else that doesn't affect the packages | no |
+
+Only the types marked "yes" appear in the changelog and lead to a new release. If apps will notice a change, use `feat` or `fix`, even if it's a dependency or build change.
 
 The scope is optional. Use it to say what the change affects, for example the component name or `python` or `npm`.
 
-If the change will break apps that use the packages, add `!` after the type or scope. Explain what apps need to change in the PR description.
+If the change will break apps that use the packages, add `!` after the type or scope. Explain what apps need to change in a `BREAKING CHANGE:` paragraph in the PR description, and in the Release PR's changelog entry.
 
 Examples:
 
 * `feat(map): add a layer toggle control`
 * `fix(filter-checkboxes): correct the display type for checkbox filtering`
-* `build: upgrade govuk-frontend to 5.11.1`
+* `feat: upgrade govuk-frontend to 5.12.0`
 * `feat(data-table)!: rename the dlDataTable params`
+* `ci: cache pip downloads in the test workflow` (not released)
 
-These titles will later be used to generate the changelog and work out version numbers automatically. Until then, follow the process below.
+### How releases work
 
-### Publishing a new version
+Releases are automated with [release-please](https://github.com/googleapis/release-please) in the [publish workflow](.github/workflows/publish.yml), which runs on every push to `main`.
 
-The npm package is published automatically by the [publish package workflow](.github/workflows/publish-package.yml) when the version in `package/package.json` changes on `main`. The workflow:
+1. When a releasable PR is merged, release-please opens a **Release PR** called `chore(main): release X.Y.Z`, or updates the one that's already open. The Release PR contains:
+   * the next version number, worked out from the PR titles merged since the last release
+   * a new [CHANGELOG.md](/CHANGELOG.md) entry listing those PRs
+   * the new version in `package/package.json`
+2. Leave the Release PR open while you merge other work. It updates itself each time.
+3. When you want to release, review the Release PR. You can edit the changelog wording in it. Then merge it. Release PRs don't trigger the test workflow, so an admin has to merge them using the branch ruleset bypass.
+4. Merging the Release PR makes the publish workflow:
+   * create the `vX.Y.Z` git tag and a GitHub release with the changelog entry as its notes
+   * publish the npm package to npm
+   * publish the Python package to [PyPI](https://pypi.org/project/digital-land-frontend/). Its version is read from the git tag by setuptools-scm.
 
-1. checks whether the version in `package/package.json` is different from the latest GitHub release
-2. if it is, builds the package with `make package` and publishes it to npm using the `NPM_TOKEN` repository secret
-3. creates a GitHub release for the new version, which also creates a `vX.Y.Z` git tag
+The Python and npm packages always get the same version, even when a change only affects one of them. That way apps only need to know one rule: use the same version of both.
 
-The Python package is not published. Apps install it from this repository's `main` branch. Its version comes from the git tag that the workflow creates, so you don't need to change it by hand.
+### Version numbers
 
-To publish a new version:
+We follow [Semantic Versioning](https://semver.org/). Until 1.0.0:
 
-1. Decide the new version number using the [versioning strategy](#versioning-strategy).
-2. Update the version in `package/package.json`.
-3. Add the changes to [CHANGELOG.md](/CHANGELOG.md).
-4. Open a pull request with these changes. Once it's merged, the npm package is published.
+| PR title | Version change | Example |
+|---|---|---|
+| `fix:`, `perf:` | patch | 0.8.0 → 0.8.1 |
+| `feat:` | patch | 0.8.0 → 0.8.1 |
+| `feat!:`, `fix!:` (breaking) | minor | 0.8.0 → 0.9.0 |
 
-### Versioning strategy
+This follows the usual convention for 0.x versions: a minor version change means "check the changelog before upgrading". npm's `^0.8.0` ranges also only accept 0.8.x updates.
 
-We follow [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH) for both the npm and Python packages. Here's our versioning strategy:
+From 1.0.0 the usual rules apply: `fix` is a patch, `feat` is a minor version and a breaking change is a major version.
 
-#### Patch Version (x.y.z → x.y.z+1)
-- Bug fixes that don't change existing functionality
-- Minor CSS adjustments that don't affect layout
-- Documentation updates
-- Performance improvements
-- Security patches
+Breaking changes include renaming or removing a component, macro or parameter, changing markup that apps' CSS or JavaScript relies on, and changes that need apps to update their build.
 
-#### Minor Version (x.y.z → x.y+1.0)
-- New features that don't break existing functionality
-- New components that are backward compatible
-- Enhancement of existing components
-- New utility functions or helpers
-- Deprecation notices (but not removal)
+### Choosing a version number
 
-#### Major Version (x.y.z → x+1.0.0)
-- Breaking changes to existing components
-- Removal of deprecated features
-- Major structural changes to the codebase
-- Changes that require updates to consuming applications
-- Significant changes to the build process
+To release a specific version instead of the one release-please works out, add a `Release-As` footer to the commit body when you squash merge a PR:
 
-Remember to always update the [CHANGELOG.md](/CHANGELOG.md) file when bumping versions to document the changes made.
+```
+Release-As: 1.0.0
+```
+
+The Release PR then changes to that version. If you forget, merge a PR with an empty commit that has the footer:
+
+```
+git commit --allow-empty -m "chore: release 1.0.0" -m "Release-As: 1.0.0"
+```
+
+Don't change the version in the Release PR by hand. release-please overwrites it the next time it runs.
+
+### Releasing GOV.UK Frontend v6 as 1.0.0
+
+1.0.0 is planned to be the upgrade to GOV.UK Frontend v6. For that PR:
+
+1. Title it `feat!: upgrade to GOV.UK Frontend v6`.
+2. In the same PR, pin `govuk-frontend` in both `package.json` files and `govuk-frontend-jinja` in `pyproject.toml` to the matching v6 versions.
+3. Explain what apps need to change in a `BREAKING CHANGE:` paragraph in the PR description.
+4. Add `Release-As: 1.0.0` to the commit body when you squash merge it.
+
+### If a publish fails
+
+The npm and PyPI jobs run independently. If one fails, fix the problem and use **Re-run failed jobs** on the workflow run. Don't use "Re-run all jobs": the release-please job won't create the release a second time, so the publish jobs would be skipped.
+
+### One-time setup
+
+Publishing needs these settings outside the code. They're recorded here so they can be checked or done again.
+
+Repository settings:
+
+* Settings → General → Pull Requests: allow squash merging only, with **Pull request title** as the default commit message
+* Settings → Actions → General: tick **Allow GitHub Actions to create and approve pull requests**, so release-please can open Release PRs
+* Settings → Rules → Rulesets: a ruleset for `main` that requires the test workflow's checks, with **Repository admin** allowed to bypass for pull requests (needed to merge Release PRs)
+
+PyPI, using [trusted publishing](https://docs.pypi.org/trusted-publishers/) so no token is stored:
+
+* the `digital-land-frontend` project has a trusted publisher for repository `digital-land/digital-land-frontend`, workflow `publish.yml`, environment `pypi`
+* before the first release this was added as a "pending publisher" from your PyPI account
+
+npm, in the `digital-land-gov-uk` organisation:
+
+* The first release has to be published with a token, because trusted publishing can only be set up on a package that already exists. The `NPM_TOKEN` repository secret holds a granular access token with read and write access to the organisation's packages.
+* To switch to [trusted publishing](https://docs.npmjs.com/trusted-publishers), go to the package's Settings → Trusted publishing on npmjs.com and add GitHub Actions with repository `digital-land/digital-land-frontend` and workflow `publish.yml`. A new trusted publisher expires if it isn't used to publish within 2 days, so add it shortly before merging a Release PR.
+* Once a release has been published with trusted publishing, delete the `NPM_TOKEN` secret and revoke the token.
 
 ## Using digital-land-frontend in your projects
 
-You need to install the python and npm packages.
+You need to install the Python and npm packages, at the same version. See the [changelog](CHANGELOG.md) for what's in each version.
 
-Install the python package by running
+Install the Python package from [PyPI](https://pypi.org/project/digital-land-frontend/). For example, in `requirements.in`:
 ```
-pip install git+https://github.com/digital-land/digital-land-frontend.git#egg=digital_land_frontend
+digital-land-frontend==0.8.0
 ```
-This gives you access to all the templates and jinja filters.
+This gives you access to all the templates and Jinja filters.
 
-Then install the npm package by running
+Then install the npm package:
 ```
-npm install @planning-data/digital-land-frontend
+npm install @digital-land-gov-uk/digital-land-frontend@0.8.0
 ```
-This gives you access to the scss, the compiled js and the npm build scripts you can use in your projects.
+This gives you access to the Sass, the compiled JavaScript and the npm build scripts you can use in your projects.
 
-
-Once installed add the following line to `package.json` `scripts`
+Once installed, add the following line to `scripts` in `package.json`:
 ```
-"nps": "nps -c ./node_modules/@planning-data/digital-land-frontend/package-scripts.js"
+"nps": "nps -c ./node_modules/@digital-land-gov-uk/digital-land-frontend/package-scripts.js"
 ```
 
 In your project you can now build the stylesheets by running:
@@ -250,6 +289,32 @@ If your project needs custom js you can use the pre-installed rollup task by cre
 ```
 npm run nps build.javascripts
 ```
+
+### Migrating from versions before 0.8.0
+
+Up to 0.7.0, the Python package was installed from this repository's `main` branch and the npm package was published as `@planning-data/digital-land-frontend`. From 0.8.0, the Python package is published to PyPI and the npm package is published under the `@digital-land-gov-uk` organisation. The `@planning-data` package is deprecated and won't get new versions.
+
+0.8.0 contains the same templates, Sass and JavaScript as 0.7.0, so you can migrate both packages in one PR:
+
+1. In your Python requirements, replace the git line:
+   ```
+   digital_land_frontend @ git+https://github.com/digital-land/digital-land-frontend.git#egg=digital_land_frontend
+   ```
+   with:
+   ```
+   digital-land-frontend==0.8.0
+   ```
+   Then recompile your lock file if you have one, for example with `pip-compile`.
+2. Replace the npm package:
+   ```
+   npm uninstall @planning-data/digital-land-frontend
+   npm install @digital-land-gov-uk/digital-land-frontend@0.8.0
+   ```
+3. Search your repo for `@planning-data/digital-land-frontend` and replace it with `@digital-land-gov-uk/digital-land-frontend`. Check:
+   * the `nps` script in `package.json`
+   * `digital-land-frontend.config.json`, if you set `digitalLandFrontendPath`
+   * any `package-scripts.js`, Sass load paths or docs that point into `node_modules`
+4. Rebuild your assets, for example `npm run nps build.stylesheets` and `npm run nps copy.javascripts`, and check the app looks and works as before.
 
 # Tasks
 
