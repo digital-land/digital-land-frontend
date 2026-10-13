@@ -5,7 +5,9 @@ This repository produces two packages from the same source:
 * a **Python package** (`digital-land-frontend`) containing the Jinja templates, components and filters
 * an **npm package** (`@digital-land-gov-uk/digital-land-frontend`) containing the Sass, compiled JavaScript, images and build scripts
 
-Apps need both, at the same version. See [Using digital-land-frontend in your projects](#using-digital-land-frontend-in-your-projects).
+Apps need both, at the same version.
+
+This README is for developing and publishing the packages. **If you want to use them in an app, see the [package README](package/README.md)**, which is also shown on [PyPI](https://pypi.org/project/digital-land-frontend/) and [npm](https://www.npmjs.com/package/@digital-land-gov-uk/digital-land-frontend).
 
 ## Development
 
@@ -216,7 +218,7 @@ Don't change the version in the Release PR by hand. release-please overwrites it
 1.0.0 is planned to be the upgrade to GOV.UK Frontend v6. For that PR:
 
 1. Title it `feat!: upgrade to GOV.UK Frontend v6`.
-2. In the same PR, pin `govuk-frontend` in both `package.json` files and `govuk-frontend-jinja` in `pyproject.toml` to the matching v6 versions.
+2. In the same PR, pin `govuk-frontend` in both `package.json` files and `govuk-frontend-jinja` in `pyproject.toml` to the matching v6 versions. Update the GOV.UK Frontend versions in the [package README](package/README.md#installation) too.
 3. Explain what apps need to change in a `BREAKING CHANGE:` paragraph in the PR description.
 4. Add `Release-As: 1.0.0` to the commit body when you squash merge it.
 
@@ -247,74 +249,9 @@ npm, in the `digital-land-gov-uk` organisation:
 
 ## Using digital-land-frontend in your projects
 
-You need to install the Python and npm packages, at the same version. See the [changelog](CHANGELOG.md) for what's in each version.
+See the [package README](package/README.md) for installing the packages, using the templates, filters, Sass and JavaScript, setting up a Flask app, and migrating from versions before 0.8.0.
 
-Install the Python package from [PyPI](https://pypi.org/project/digital-land-frontend/). For example, in `requirements.in`:
-```
-digital-land-frontend==0.8.0
-```
-This gives you access to all the templates and Jinja filters.
-
-Then install the npm package:
-```
-npm install @digital-land-gov-uk/digital-land-frontend@0.8.0
-```
-This gives you access to the Sass, the compiled JavaScript and the npm build scripts you can use in your projects.
-
-Once installed, add the following line to `scripts` in `package.json`:
-```
-"nps": "nps -c ./node_modules/@digital-land-gov-uk/digital-land-frontend/package-scripts.js"
-```
-
-In your project you can now build the stylesheets by running:
-```
-npm run nps build.stylesheets
-```
-
-and you can put the js in the right location by running
-```
-npm run nps copy.javascripts
-```
-
-To change where these files are outputted create a `digital-land-frontend.config.json` file. In here you can set these options:
-
-* digitalLandFrontendPath
-* govukFrontendPath
-* scssPath
-* stylesheetsOutputPath
-* jsOutputPath
-* rollupConfig
-
-If your project needs custom js you can use the pre-installed rollup task by creating a `rollup.config.js` file and once you are ready, running
-```
-npm run nps build.javascripts
-```
-
-### Migrating from versions before 0.8.0
-
-Up to 0.7.0, the Python package was installed from this repository's `main` branch and the npm package was published as `@planning-data/digital-land-frontend`. From 0.8.0, the Python package is published to PyPI and the npm package is published under the `@digital-land-gov-uk` organisation. The `@planning-data` package is deprecated and won't get new versions.
-
-0.8.0 contains the same templates, Sass and JavaScript as 0.7.0, so you can migrate both packages in one PR:
-
-1. In your Python requirements, replace the git line:
-   ```
-   digital_land_frontend @ git+https://github.com/digital-land/digital-land-frontend.git#egg=digital_land_frontend
-   ```
-   with:
-   ```
-   digital-land-frontend==0.8.0
-   ```
-   Then recompile your lock file if you have one, for example with `pip-compile`.
-2. Replace the npm package:
-   ```
-   npm uninstall @planning-data/digital-land-frontend
-   npm install @digital-land-gov-uk/digital-land-frontend@0.8.0
-   ```
-3. Search your repo for `@planning-data/digital-land-frontend` and replace it with `@digital-land-gov-uk/digital-land-frontend`. Check:
-   * the `nps` script in `package.json`
-   * `digital-land-frontend.config.json`, if you set `digitalLandFrontendPath`
-   * any `package-scripts.js`, Sass load paths or docs that point into `node_modules`
-4. Rebuild your assets, for example `npm run nps build.stylesheets` and `npm run nps copy.javascripts`, and check the app looks and works as before.
+The package README is published to both registries: PyPI uses it through `readme` in `pyproject.toml`, and npm includes it in the npm package. Keep it written for app developers, and use full URLs for links, because PyPI doesn't resolve relative links. Changes to it appear on PyPI and npm with the next release.
 
 # Tasks
 

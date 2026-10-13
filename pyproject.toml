@@ -7,7 +7,8 @@ name = "digital-land-frontend"
 # the version is worked out from git tags by setuptools-scm
 dynamic = ["version"]
 description = "Reusable frontend code for digital land services and products"
-readme = "README.md"
+# shown on PyPI; it's also the npm package's README
+readme = "package/README.md"
 requires-python = ">=3.9"
 authors = [
     { name = "MHCLG Planning Data Team", email = "DigitalLand@communities.gov.uk" },
