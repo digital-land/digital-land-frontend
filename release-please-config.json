@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "release-type": "simple",
+  "include-component-in-tag": false,
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "packages": {
+    ".": {
+      "package-name": "digital-land-frontend",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "package/package.json",
+          "jsonpath": "$.version"
+        }
+      ]
+    }
+  }
+}
