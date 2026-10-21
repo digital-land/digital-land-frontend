@@ -26,15 +26,13 @@
     "default.paths.json"
   ],
   "dependencies": {
-    "browser-sync": "^2.27.7",
+    "browser-sync": "^3.0.4",
     "chokidar-cli": "^3.0.0",
-    "copyfiles": "latest",
+    "copyfiles": "^2.4.1",
     "govuk-frontend": "5.11.1",
     "nps": "^5.10.0",
     "rollup": "^2.60.0",
-    "sass": "^1.77.6",
-    "sass-lint": "^1.13.1",
-    "standardx": "^7.0.0"
+    "sass": "^1.77.6"
   },
   "homepage": "https://github.com/digital-land/digital-land-frontend#readme",
   "main": "index.js",
