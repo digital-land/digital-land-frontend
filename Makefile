@@ -13,8 +13,13 @@ build:
 package:
 	npm run build:package
 
-test:
+test: test-python test-javascript
+
+test-python:
 	python -m pytest -sv tests/unit
+
+test-javascript:
+	npm test
 
 lint:	black-check flake8
 

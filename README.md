@@ -14,9 +14,9 @@ This README is for developing and publishing the packages. **If you want to use 
 ### Requirements
 
 - [Python](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python) 3.10+
-- [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/) 16+ (the CI checks use Node 24)
+- [Node](https://www.freecodecamp.org/news/how-to-install-node-in-your-machines-macos-linux-windows/) 22.12+. We recommend Node 24, which the CI checks and publishing use.
 
-We recommend using Node Version Manager (nvm). This repository has a [.nvmrc](.nvmrc) file, so running `nvm use` switches to the right version of Node.
+We recommend using Node Version Manager (nvm). This repository has a [.nvmrc](.nvmrc) file, so running `nvm use` switches to Node 24.
 
 ### Setting up
 
@@ -43,9 +43,19 @@ We use a `.editorconfig` file to ensure code consistency. There are [plugins for
 
 ### Running the tests
 
-```
-python -m pytest tests/unit
-```
+Run all the tests with `make test`, or run each set on its own:
+
+| Command | What it tests |
+|---|---|
+| `python -m pytest tests/unit` | the Python package: filters, globals and templates |
+| `npm test` | the npm package, using [vitest](https://vitest.dev/) |
+
+The tests are organised by kind:
+
+* `tests/unit/` holds Python unit tests, run with pytest. They don't need anything built.
+* `tests/integration/javascript/` holds tests that use the npm package the way an app does. Each test creates a temporary app, links the built package and `govuk-frontend` into its `node_modules`, and runs the real build scripts from [package-scripts.js](package/package-scripts.js) in it. `npm test` builds the package first, so the tests never run against an old build. The helpers for this are in `tests/integration/javascript/helpers/`.
+
+When you fix a bug, add a test that fails without the fix.
 
 ### Building the packages
 
@@ -58,7 +68,7 @@ The [test workflow](.github/workflows/test.yml) runs on every pull request. It c
 
 * runs the Python unit tests
 * builds the Python package and checks the built package can load all of its templates
-* builds the npm package and lists its contents
+* builds the npm package, lists its contents and runs the JavaScript tests
 * checks the pull request title follows the [pull request title rules](#pull-request-titles). This check only runs for pull requests.
 
 ## Templates

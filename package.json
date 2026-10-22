@@ -3,7 +3,7 @@
   "private": true,
   "description": "frontend components and assets for digital land",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=22.12.0"
   },
   "scripts": {
     "build:javascripts": "rollup --config rollup.config.js",
@@ -16,7 +16,9 @@
     "build:package": "npm-run-all clean:package build:javascripts copy:*",
     "watch:javascripts": "rollup --config rollup.config.js --watch",
     "lint:stylesheets": "sass-lint --config .sass-lint.yml 'digital_land_frontend/**/*.scss' --verbose --no-exit",
-    "build": "npm-run-all --serial build:*"
+    "build": "npm-run-all --serial build:*",
+    "test": "vitest run",
+    "test:integration": "vitest run tests/integration/javascript"
   },
   "repository": {
     "type": "git",
@@ -41,6 +43,7 @@
     "rollup": "^2.60.0",
     "sass": "^1.77.6",
     "sass-lint": "^1.13.1",
-    "standardx": "^7.0.0"
+    "standardx": "^7.0.0",
+    "vitest": "^5.0.5"
   }
 }
