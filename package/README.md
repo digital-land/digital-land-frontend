@@ -136,7 +136,7 @@ Then run them with `npm run nps <script>`:
 | `build.javascripts` | compiles your JavaScript with rollup, using your `rollup.config.js` |
 | `copy.javascripts` | copies the Digital Land Frontend JavaScript into your project |
 | `copy.images` | copies the Digital Land Frontend images into your project |
-| `copy.govukAssets` | copies the GOV.UK Frontend fonts and images into your project |
+| `copy.govukAssets` | copies the GOV.UK Frontend fonts and images to `<govukOutputPath>/govuk/assets/`. The styles load them from `/static/govuk/assets/`, so set `govukOutputPath` to the folder you serve as `/static`. |
 | `watch.pages` | reloads the browser when templates or static files change, using browser-sync |
 | `watch.assets` | rebuilds JavaScript and stylesheets when your source files change |
 | `watch.stylesheets` | rebuilds stylesheets when your source files change |

@@ -75,6 +75,9 @@ jobs:
         working-directory: package
         run: npm pack --dry-run
 
+      - name: Run JavaScript tests
+        run: npm test
+
   pr-title:
     name: PR title follows Conventional Commits
     if: github.event_name == 'pull_request'
