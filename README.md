@@ -47,12 +47,13 @@ Run all the tests with `make test`, or run each set on its own:
 
 | Command | What it tests |
 |---|---|
-| `python -m pytest tests/unit` | the Python package: filters, globals and templates |
+| `python -m pytest tests/unit tests/acceptance` | the Python package: filters, globals and layouts |
 | `npm test` | the npm package, using [vitest](https://vitest.dev/) |
 
 The tests are organised by kind:
 
-* `tests/unit/` holds Python unit tests, run with pytest. They don't need anything built.
+* `tests/unit/` holds Python unit tests for individual functions, such as the filters, run with pytest. They don't need anything built.
+* `tests/acceptance/` holds tests for what apps rely on when they use the library. For example, `test_layouts.py` runs the same checks against every layout in `templates/layouts/`, such as only linking to images the package ships. They're run with pytest and pick up new layouts automatically.
 * `tests/integration/javascript/` holds tests that use the npm package the way an app does. Each test creates a temporary app, links the built package and `govuk-frontend` into its `node_modules`, and runs the real build scripts from [package-scripts.js](package/package-scripts.js) in it. `npm test` builds the package first, so the tests never run against an old build. The helpers for this are in `tests/integration/javascript/helpers/`.
 
 When you fix a bug, add a test that fails without the fix.
