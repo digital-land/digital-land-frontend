@@ -16,7 +16,7 @@ package:
 test: test-python test-javascript
 
 test-python:
-	python -m pytest -sv tests/unit
+	python -m pytest -sv tests/unit tests/acceptance
 
 test-javascript:
 	npm test
